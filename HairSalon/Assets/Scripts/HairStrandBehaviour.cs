@@ -28,14 +28,6 @@ public class HairStrandBehaviour : MonoBehaviour
     { 
 
     }
-    
-
-    // Knot-level touch will be reported by individual KnotBehaviour instances.
-    public void OnKnotTouched(int knotIndex, Collider other)
-    {
-        Debug.Log($"Knot touched: {knotIndex} by {other.gameObject.name}");
-        //CutAtKnot(knotIndex);
-    }
 
     // Called via SendMessage from KnotBehaviour to avoid compile-time coupling
     // TriggerEnterInfo contains the knot index and the other (touched) collider
@@ -53,7 +45,7 @@ public class HairStrandBehaviour : MonoBehaviour
     }
 
     // Create simple visuals (spheres) for each knot
-    // Useful to see where the spline control point are
+    // Useful to see where the spline control point are and adds colliders
     private void CreateKnotVisuals()
     {
         // Clean existing
