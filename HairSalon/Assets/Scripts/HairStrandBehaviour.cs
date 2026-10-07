@@ -6,7 +6,6 @@ using UnityEngine.Rendering;
 using Unity.Mathematics;
 using UnityEditor;
 
-[ExecuteInEditMode()]
 public class HairStrandBehaviour : MonoBehaviour
 {
     [SerializeField]
@@ -74,8 +73,8 @@ public class HairStrandBehaviour : MonoBehaviour
             var rend = sphere.GetComponent<Renderer>();
             if (rend != null)
             {
-                rend.sharedMaterial = new Material(Shader.Find("Universal Render Pipeline/Lit"));
-                rend.sharedMaterial.color = Color.white;
+                rend.material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+                rend.material.color = Color.white;
             }
             // make sure visual doesn't interfere with physics, but allow trigger detection
             var col = sphere.GetComponent<Collider>();
