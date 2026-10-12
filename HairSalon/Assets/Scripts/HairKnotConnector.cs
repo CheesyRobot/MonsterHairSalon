@@ -14,7 +14,7 @@ public class HairKnotConnector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Checking if the colliding object is the scissors or paintbrush
-        if (other.gameObject.name == "Scissors" || other.CompareTag("Scissors"))
+        if (other.gameObject.name == "Scissors")// || other.CompareTag("Scissors"))
         {
             Debug.Log($"Hair cut at segment: {knotIndex}");
             mainHairScript.CutHairAt(knotIndex);
