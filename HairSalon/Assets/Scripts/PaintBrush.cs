@@ -115,14 +115,11 @@ public class PaintBrush : MonoBehaviour
                                                   hairLayers, QueryTriggerInteraction.Collide);
         for (int i = 0; i < count; i++)
         {
-            var knot = hits[i].GetComponent<KnotBehaviour>();
-            if (knot == null) continue;
+            var knot = hits[i].GetComponent<HairKnotConnector>();
+            if (knot == null || knot.Strand == null) continue;
 
-            var strand = hits[i].GetComponentInParent<HairStrandBehaviour>();
-            if (strand == null) continue;
-
-            strand.PaintAtKnot(knot.triggerEnterInfo.knotIndex, brushColor,
-                               knotRadius, paintSpeed * Time.deltaTime);
+            knot.Strand.PaintAtKnot(knot.KnotIndex, brushColor,
+                                    knotRadius, paintSpeed * Time.deltaTime);
         }
     }
 
