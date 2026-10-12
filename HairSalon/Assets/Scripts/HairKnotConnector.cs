@@ -13,16 +13,15 @@ public class HairKnotConnector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // 1. Tikriname pagal objekto pavadinimą arba geriau pagal Tag / Komponentą
+        // Checking if the colliding object is the scissors or paintbrush
         if (other.gameObject.name == "Scissors" || other.CompareTag("Scissors"))
         {
-            Debug.Log($"Plaukas nukirptas ties segmentu: {knotIndex}");
+            Debug.Log($"Hair cut at segment: {knotIndex}");
             mainHairScript.CutHairAt(knotIndex);
         }
         else if (other.gameObject.name == "PaintBrush")
         {
-            // Čia galite įrašyti kodą, kuris nudažo Line Renderer spalvą
-            Debug.Log("Plaukas liečiamas teptuku!");
+            Debug.Log("Hair touched with paintbrush!");
         }
     }
 }

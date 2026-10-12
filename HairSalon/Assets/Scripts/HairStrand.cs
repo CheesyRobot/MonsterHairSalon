@@ -71,7 +71,7 @@ public class HairStrand : MonoBehaviour
 
     void FixedUpdate()
     {
-        //SimulatePhysics();
+        SimulatePhysics();
         ApplyConstraints();
     }
 
