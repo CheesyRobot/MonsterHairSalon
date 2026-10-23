@@ -183,8 +183,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.07296899
-        value: 0.05
+        time: 0.07576135
+        value: 0.12546997
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -193,7 +193,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.015838623
+        value: 0.041007563
         inSlope: -0.17898105
         outSlope: -0.17898105
         tangentMode: 0
@@ -255,9 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11ec7c5213483a40924530cb1b585b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HairStrand
-  segmentCount: 20
+  segmentCount: 30
   totalLength: 1
-  hairThickness: 0.05
+  hairThickness: 0.03
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   gravity: {x: 0, y: -9.81, z: 0}
   physicsIterations: 5
