@@ -36,7 +36,7 @@ public class HairStrand : MonoBehaviour
 
     private List<HairSegment> segments = new List<HairSegment>();
     private LineRenderer lineRenderer;
-    private float segmentLength;
+    public float segmentLength;
 
     private bool colorsDirty;
     private const int MaxGradientKeys = 8;
@@ -194,11 +194,14 @@ public class HairStrand : MonoBehaviour
             {
                 Destroy(segments[i].colliderObj);
             }
+            // Updating length
+            //totalLength -= segmentLength;
             segments.RemoveAt(i);
         }
 
         // Updating Line Renderer segments count
         lineRenderer.positionCount = segments.Count;
+        //segmentCount = segments.Count;
         colorsDirty = true;
     }
 

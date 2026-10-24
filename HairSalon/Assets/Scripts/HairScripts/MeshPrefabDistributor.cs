@@ -16,19 +16,16 @@ public class MeshPrefabDistributor : MonoBehaviour
     [Tooltip("How many times the script will try to find a valid spot for a single prefab before skipping it to prevent freezing.")]
     [SerializeField] private int maxAttemptsPerPrefab = 30;
 
-    // A standard List<T> is used dynamically during generation, 
-    // then trimmed to a tight, performant continuous layout.
-    private List<GameObject> instantiatedPrefabsList = new List<GameObject>();
-    private GameObject[] instantiatedPrefabs;
+    private List<HairStrand> instantiatedPrefabsList = new List<HairStrand>();
 
-    /// <summary>
-    /// Public property to access the optimized collection from other scripts.
-    /// </summary>
-    public GameObject[] InstantiatedPrefabs => instantiatedPrefabs;
+    [Header("Data Saving")]
+    [Tooltip("The ScriptableObject asset where references will be saved.")]
+    [SerializeField] private HairStyleSO targetContainer;
 
     private void Start()
     {
         DistributePrefabs();
+        Debug.Log(instantiatedPrefabsList.Count);
     }
 
     public void DistributePrefabs()
@@ -46,7 +43,6 @@ public class MeshPrefabDistributor : MonoBehaviour
             return;
         }
 
-        ClearExistingPrefabs();
         instantiatedPrefabsList.Clear();
 
         Vector3[] vertices = mesh.vertices;
@@ -123,13 +119,21 @@ public class MeshPrefabDistributor : MonoBehaviour
             if (validSpotFound)
             {
                 Quaternion worldRot = Quaternion.FromToRotation(Vector3.up, finalWorldNormal);
+                // For undos in editor
+#if UNITY_EDITOR
+                GameObject spawnedInstance = UnityEditor.PrefabUtility.InstantiatePrefab(prefab, transform) as GameObject;
+                if (spawnedInstance != null)
+                {
+                    spawnedInstance.transform.position = finalWorldPos;
+                    spawnedInstance.transform.rotation = worldRot;
+                    UnityEditor.Undo.RegisterCreatedObjectUndo(spawnedInstance, "Distributed Prefab");
+                }
+#else
                 GameObject spawnedInstance = Instantiate(prefab, finalWorldPos, worldRot, transform);
-                instantiatedPrefabsList.Add(spawnedInstance);
+#endif
+                instantiatedPrefabsList.Add(spawnedInstance.GetComponent<HairStrand>());
             }
         }
-
-        // Convert the dynamic list back to a highly optimal contiguous array for external runtime lookups
-        instantiatedPrefabs = instantiatedPrefabsList.ToArray();
     }
 
     /// <summary>
@@ -162,6 +166,30 @@ public class MeshPrefabDistributor : MonoBehaviour
         return null;
     }
 
+    public void SaveToScriptableObject()
+    {
+        if (targetContainer == null)
+        {
+            Debug.LogError("[MeshPrefabDistributor] Target Container (ScriptableObject) is not assigned!", this);
+            return;
+        }
+
+        if (instantiatedPrefabsList == null || instantiatedPrefabsList.Count == 0)
+        {
+            Debug.LogWarning("[MeshPrefabDistributor] No prefabs have been instantiated yet to save.", this);
+            return;
+        }
+
+        targetContainer.hairStrandsList = instantiatedPrefabsList;
+
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(targetContainer);
+        UnityEditor.AssetDatabase.SaveAssets();
+        Debug.Log($"[MeshPrefabDistributor] Successfully saved {instantiatedPrefabsList.Count} prefab references to {targetContainer.name}!", targetContainer);
+#endif
+    }
+
+    /* //function for clearing an array
     private void ClearExistingPrefabs()
     {
         if (instantiatedPrefabs != null)
@@ -176,5 +204,5 @@ public class MeshPrefabDistributor : MonoBehaviour
             }
         }
         instantiatedPrefabs = null;
-    }
+    }*/
 }
