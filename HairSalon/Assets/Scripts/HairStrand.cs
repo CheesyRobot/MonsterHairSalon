@@ -56,7 +56,7 @@ public class HairStrand : MonoBehaviour
             CreateSegmentCollider(segment, i);
 
             segments.Add(segment);
-            spawnPos += Vector3.down * segmentLength;
+            spawnPos += Vector3.up * segmentLength;
         }
 
         lineRenderer.positionCount = segments.Count;
