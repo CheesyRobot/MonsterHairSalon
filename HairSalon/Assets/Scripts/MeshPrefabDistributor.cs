@@ -94,12 +94,15 @@ public class MeshPrefabDistributor : MonoBehaviour
                 // Uniform Barycentric Coordinates
                 float r1 = Random.value;
                 float r2 = Random.value;
+                //float r1 = 0f;
+                //float r2 = 0f;
                 if (r1 + r2 > 1f)
                 {
                     r1 = 1f - r1;
                     r2 = 1f - r2;
                 }
                 float r3 = 1f - r1 - r2;
+                //float r3 = 1f;
 
                 Vector3 localPos = r1 * vertices[iA] + r2 * vertices[iB] + r3 * vertices[iC];
                 Vector3 localNormal = (r1 * normals[iA] + r2 * normals[iB] + r3 * normals[iC]).normalized;

@@ -5448,6 +5448,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5441361209521627566, guid: a922f6e4a2041e441bb1acf7805fa3c4, type: 3}
   m_PrefabInstance: {fileID: 1275866784}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1280451114 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3577520945074442188, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
+  m_PrefabInstance: {fileID: 3645697083211395572}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1280451127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280451114}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612b8893c2e1ac24d946bd00ba287a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeshPrefabDistributor
+  prefab: {fileID: 1092909662484426529, guid: 4164c5a120b161146bbdd3e583344bd8, type: 3}
+  targetPrefabCount: 300
+  minDistance: 0.016
+  maxAttemptsPerPrefab: 100
 --- !u!1001 &1287061428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9213,10 +9234,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 1092909662484426529, guid: 266b46802cd68ce45ac1eebf2b7e1f69, type: 3}
+    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
+      propertyPath: minDistance
+      value: 0.016
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
+      propertyPath: targetPrefabCount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
+      propertyPath: maxAttemptsPerPrefab
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3577520945074442188, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1280451127}
   m_SourcePrefab: {fileID: 100100000, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
