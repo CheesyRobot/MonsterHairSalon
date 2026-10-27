@@ -151,7 +151,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9bd248c320f1b4845af1953e0d2abb6e, type: 2}
+  - {fileID: 2100000, guid: f568de03d8bf77046bbdec5f8423e3ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -265,6 +265,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 129
+  segmentLength: 0
 --- !u!1 &5045554762995988590
 GameObject:
   m_ObjectHideFlags: 0

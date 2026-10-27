@@ -4,18 +4,53 @@ using TMPro;
 
 public class ClientGenerator : MonoBehaviour
 {
-    
+
     public TMP_Text clientText;
     public TMP_Text typeText;
     public TMP_Text wantsText;
 
     //Lists the random client is picked from, edit these in the Inspector or here
     public string[] names = { "Morgana", "Lilith", "Isolde", "Beatrice", "Seraphina", "Willow", "Rowena", "Esmeralda", "Ophelia", "Griselda", "Mavis", "Persephone" };
-    public string[] types = { "Zombie", "Vampire", "Werewolf", "Ghost", "Witch", "Mummy", "Banshee", "Ghoul" };
+    public string[] types = { "Zombie", "Vampire", "Werewolf" };
     public string[] wants = { "Haircut", "Hair dyeing", "Hair washing", "Hair styling", "Hair braiding", "Hair trim" };
 
     //How many things a client can want at most, every client wants at least 1
     public int maxWants = 3;
+
+    //The hair a client type gets, the type has to be written exactly like in the types list
+    [System.Serializable]
+    public class HairProfile
+    {
+        public string type;
+        public HairStyleSO hairStyle;
+    }
+
+    [Header("Hair")]
+    public MeshPrefabDistributor hairDistributor;
+    public HairProfile[] hairProfiles;
+
+    //The skin tint a client type gets, the type has to be written exactly like in the types list
+    [System.Serializable]
+    public class SkinProfile
+    {
+        public string type;
+        [ColorUsage(false, true)] public Color skinColor = Color.white; //HDR, values above 1 make the skin brighter
+    }
+
+    //A mesh that shows skin and which of its materials is the skin
+    [System.Serializable]
+    public class SkinTarget
+    {
+        public Renderer renderer;
+        public int materialIndex = 0;
+    }
+
+    [Header("Skin")]
+    public SkinTarget[] skinTargets; //every mesh that should change color
+    public string colorProperty = "_BaseColor"; //URP Lit uses _BaseColor, Built-in uses _Color
+    public SkinProfile[] skinProfiles;
+
+    private MaterialPropertyBlock skinBlock;
 
     //The client that is currently shown on the TV
     public string currentName { get; private set; }
@@ -33,6 +68,9 @@ public class ClientGenerator : MonoBehaviour
     {
         currentName = names[Random.Range(0, names.Length)];
         currentType = types[Random.Range(0, types.Length)];
+
+        SpawnHair();
+        SetSkin();
 
         //How many things this client wants (Random.Range with ints leaves out the max value)
         int count = Mathf.Min(Random.Range(1, maxWants + 1), wants.Length);
@@ -52,14 +90,53 @@ public class ClientGenerator : MonoBehaviour
         wantsText.text = "Wants: " + string.Join(", ", currentWants);
     }
 
+    //Finds the hair profile of the current type and spawns that hair on the head
+    private void SpawnHair()
+    {
+        if (hairDistributor == null) return;
+
+        foreach (var profile in hairProfiles)
+        {
+            if (profile.type == currentType)
+            {
+                hairDistributor.SetupAndDistribute(profile.hairStyle);
+                return;
+            }
+        }
+        Debug.LogWarning("No hair profile for type " + currentType);
+    }
+
+    //Finds the skin profile of the current type and tints the skin with it
+    private void SetSkin()
+    {
+        if (skinTargets == null || skinTargets.Length == 0) return;
+
+        foreach (var profile in skinProfiles)
+        {
+            if (profile.type == currentType)
+            {
+                //property block tints these renderers only and doesn't change the material asset
+                if (skinBlock == null) skinBlock = new MaterialPropertyBlock();
+                foreach (var target in skinTargets)
+                {
+                    if (target.renderer == null) continue;
+                    target.renderer.GetPropertyBlock(skinBlock, target.materialIndex);
+                    skinBlock.SetColor(colorProperty, profile.skinColor);
+                    target.renderer.SetPropertyBlock(skinBlock, target.materialIndex);
+                }
+                return;
+            }
+        }
+        Debug.LogWarning("No skin profile for type " + currentType);
+    }
+
     //Hook this to the On Pressed event of the yes button
     public void Accept()
     {
         Debug.Log("Accepted " + currentName + " the " + currentType + " who wants: " + string.Join(", ", currentWants));
-        //TODO: start the haircut / dyeing job for this client here
+
     }
 
-    //Hook this to the On Pressed event of the no button
     //Turns the client away and shows a new one
     public void Decline()
     {

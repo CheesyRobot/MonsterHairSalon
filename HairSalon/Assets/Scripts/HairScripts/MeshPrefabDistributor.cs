@@ -22,10 +22,54 @@ public class MeshPrefabDistributor : MonoBehaviour
     [Tooltip("The ScriptableObject asset where references will be saved.")]
     [SerializeField] private HairStyleSO targetContainer;
 
+    [Header("Client Hair")]
+    [Tooltip("Turn this off when the ClientGenerator spawns the hair, otherwise the hair is spawned twice.")]
+    [SerializeField] private bool distributeOnStart = false;
+
     private void Start()
     {
+        if (!distributeOnStart) return;
         DistributePrefabs();
         Debug.Log(instantiatedPrefabsList.Count);
+    }
+
+    // Called by the ClientGenerator, swaps the old hair for the hair of the new client
+    public void SetupAndDistribute(GameObject newPrefab, int count, float distance)
+    {
+        prefab = newPrefab;
+        targetPrefabCount = count;
+        minDistance = distance;
+
+        ClearHair();
+        DistributePrefabs();
+    }
+
+    // Same thing but reads everything from a HairStyleSO
+    public void SetupAndDistribute(HairStyleSO style)
+    {
+        if (style == null)
+        {
+            Debug.LogError("[MeshPrefabDistributor] The hair profile has no Hair Style assigned!", this);
+            return;
+        }
+
+        if (style.hairPrefab == null)
+        {
+            Debug.LogError($"[MeshPrefabDistributor] Hair Style {style.name} has no Hair Prefab assigned!", style);
+            return;
+        }
+
+        SetupAndDistribute(style.hairPrefab, style.strandCount, style.minDistance);
+    }
+
+    // Removes all the hair strands that were spawned before
+    public void ClearHair()
+    {
+        foreach (var strand in instantiatedPrefabsList)
+        {
+            if (strand != null) Destroy(strand.gameObject);
+        }
+        instantiatedPrefabsList.Clear();
     }
 
     public void DistributePrefabs()
@@ -40,6 +84,7 @@ public class MeshPrefabDistributor : MonoBehaviour
         if (prefab == null)
         {
             Debug.LogError("[MeshPrefabDistributor] No Prefab assigned in the inspector!", this);
+            DestroyBakedMesh();
             return;
         }
 
@@ -134,6 +179,8 @@ public class MeshPrefabDistributor : MonoBehaviour
                 instantiatedPrefabsList.Add(spawnedInstance.GetComponent<HairStrand>());
             }
         }
+
+        DestroyBakedMesh();
     }
 
     /// <summary>
@@ -161,9 +208,24 @@ public class MeshPrefabDistributor : MonoBehaviour
         }
         if (TryGetComponent(out SkinnedMeshRenderer skinned) && skinned.sharedMesh != null)
         {
-            return skinned.sharedMesh;
+            // The shared mesh is in the bind pose, so bake it to get the current pose of the character
+            DestroyBakedMesh();
+            bakedMesh = new Mesh();
+            skinned.BakeMesh(bakedMesh);
+            return bakedMesh;
         }
         return null;
+    }
+
+    // Snapshot of a skinned mesh, only needed while the hair is being placed
+    private Mesh bakedMesh;
+
+    private void DestroyBakedMesh()
+    {
+        if (bakedMesh == null) return;
+        if (Application.isPlaying) Destroy(bakedMesh);
+        else DestroyImmediate(bakedMesh);
+        bakedMesh = null;
     }
 
     public void SaveToScriptableObject()

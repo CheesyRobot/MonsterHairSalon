@@ -12,7 +12,7 @@ public class HairStrand : MonoBehaviour
         public float radius;
         public Color color;
 
-        public HairSegment(Vector3 pos, float rad,Color col)
+        public HairSegment(Vector3 pos, float rad, Color col)
         {
             currentPos = pos;
             oldPos = pos;
@@ -182,7 +182,7 @@ public class HairStrand : MonoBehaviour
         segment.colliderObj = colObj;
     }
 
-    
+
     public void CutHairAt(int cutIndex)
     {
         if (cutIndex <= 0 || cutIndex >= segments.Count) return;
@@ -242,19 +242,24 @@ public class HairStrand : MonoBehaviour
 
         for (int k = 0; k < keyCount; k++)
         {
+            // Where this key sits along the strand (0..1) and which knot is at that spot
             float t = keyCount == 1 ? 0f : k / (float)(keyCount - 1);
             float center = t * (knotCount - 1);
-            float half = keyCount == 1 ? knotCount : (knotCount - 1) / (float)(keyCount - 1) * 0.5f;
 
+            // The knots around the key that get averaged
+            float half = keyCount == 1 ? knotCount : (knotCount - 1) / (float)(keyCount - 1) * 0.5f;
             int from = Mathf.Max(0, Mathf.CeilToInt(center - half));
             int to = Mathf.Min(knotCount - 1, Mathf.FloorToInt(center + half));
+            // Always use at least one knot
             if (to < from) from = to = Mathf.Clamp(Mathf.RoundToInt(center), 0, knotCount - 1);
 
+            // Average the colors of those knots
             Color sum = Color.black;
             for (int i = from; i <= to; i++) sum += segments[i].color;
             colorKeys[k] = new GradientColorKey(sum / (to - from + 1), t);
         }
 
+        // Alpha stays fully opaque
         var gradient = new Gradient();
         gradient.SetKeys(colorKeys, new[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(1f, 1f) });
         lineRenderer.colorGradient = gradient;

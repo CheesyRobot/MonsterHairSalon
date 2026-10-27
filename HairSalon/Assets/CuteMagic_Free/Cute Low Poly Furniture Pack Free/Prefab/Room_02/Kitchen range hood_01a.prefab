@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 2e68be5e2b5ad6f44acbe2a05e834f1f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 5782a76d1b84e2b438841c6ab721e047, type: 2}
+      objectReference: {fileID: 2100000, guid: f60f48d1096adc8478cf073306848141, type: 2}
     - target: {fileID: 919132149155446097, guid: 2e68be5e2b5ad6f44acbe2a05e834f1f, type: 3}
       propertyPath: m_Name
       value: Kitchen range hood_01a
