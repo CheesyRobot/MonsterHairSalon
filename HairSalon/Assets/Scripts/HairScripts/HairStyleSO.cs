@@ -10,6 +10,19 @@ public class HairStyleSO : ScriptableObject
     public float minDistance = 0.016f;
 
     // Scene objects can't be saved in an asset, so this stays empty after a restart
-    [SerializeField]
-    public List<HairStrand> hairStrandsList;
+    //public List<HairStrand> hairStrandsList;
+    public List<HairStrandProperty> hairList;
+
+    
+}
+
+[System.Serializable]
+public class HairStrandProperty
+{
+    public string sName;
+    public Vector3 transformPos;
+    public Quaternion transformRot;
+    public float slength;
+    public int segments;
+    // A color property can be added here for the singular hair strand
 }

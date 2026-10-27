@@ -2408,7 +2408,7 @@ MonoBehaviour:
   - type: Zombie
     hairStyle: {fileID: 11400000, guid: 4a44327920b4d924b902d0128d020a4a, type: 2}
   - type: Vampire
-    hairStyle: {fileID: 11400000, guid: 4a44327920b4d924b902d0128d020a4a, type: 2}
+    hairStyle: {fileID: 11400000, guid: d34de8248daa0e345bbf3561940ac90a, type: 2}
   - type: Werewolf
     hairStyle: {fileID: 11400000, guid: 4a44327920b4d924b902d0128d020a4a, type: 2}
   skinTargets:
@@ -2424,6 +2424,9 @@ MonoBehaviour:
     skinColor: {r: 0.9339623, g: 0.81501424, b: 0.8199704, a: 0}
   - type: Werewolf
     skinColor: {r: 0.46226418, g: 0.43827876, b: 0.43827876, a: 0}
+  faceImage: {fileID: 0}
+  hairImage: {fileID: 0}
+  clientObject: {fileID: 0}
   currentWants: []
 --- !u!1001 &484517679
 PrefabInstance:
@@ -2684,7 +2687,7 @@ PrefabInstance:
     - target: {fileID: 9046697503397677420, guid: b3a834ea99b55de469c8425f5910aaea, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1280451127}
     - target: {fileID: 9046697503397677420, guid: b3a834ea99b55de469c8425f5910aaea, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -5024,7 +5027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8135023674665499069, guid: 58d0a4ac86f2348deb02f3880c71378e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8518324294302271954, guid: 58d0a4ac86f2348deb02f3880c71378e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5161,7 +5164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1280451114}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 612b8893c2e1ac24d946bd00ba287a09, type: 3}
   m_Name: 
@@ -5170,8 +5173,9 @@ MonoBehaviour:
   targetPrefabCount: 300
   minDistance: 0.016
   maxAttemptsPerPrefab: 100
-  targetContainer: {fileID: 11400000, guid: 4a44327920b4d924b902d0128d020a4a, type: 2}
+  targetContainer: {fileID: 0}
   distributeOnStart: 1
+  distributeFromTargetContainer: 1
 --- !u!137 &1280451128 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3375520201293236051, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
@@ -6745,6 +6749,7 @@ MonoBehaviour:
   maxAttemptsPerPrefab: 30
   targetContainer: {fileID: 0}
   distributeOnStart: 0
+  distributeFromTargetContainer: 1
 --- !u!23 &1838188149
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8474,11 +8479,19 @@ PrefabInstance:
       objectReference: {fileID: 1092909662484426529, guid: 266b46802cd68ce45ac1eebf2b7e1f69, type: 3}
     - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
       propertyPath: minDistance
       value: 0.016
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
+      propertyPath: targetContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: d34de8248daa0e345bbf3561940ac90a, type: 2}
+    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
+      propertyPath: distributeOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
       propertyPath: targetPrefabCount
@@ -8487,6 +8500,10 @@ PrefabInstance:
     - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
       propertyPath: maxAttemptsPerPrefab
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
+      propertyPath: distributeFromTargetContainer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

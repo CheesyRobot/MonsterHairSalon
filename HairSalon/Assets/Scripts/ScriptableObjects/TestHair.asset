@@ -15,4 +15,254 @@ MonoBehaviour:
   hairPrefab: {fileID: 1092909662484426529, guid: 4164c5a120b161146bbdd3e583344bd8, type: 3}
   strandCount: 50
   minDistance: 0.016
-  hairStrandsList: []
+  hairList:
+  - sName: HairStrand00
+    transformPos: {x: 1.5776201, y: 1.3719842, z: -1.6847272}
+    transformRot: {x: 0.20516013, y: -0, z: -0.019144028, w: 0.9785413}
+    slength: 0.14
+    segments: 14
+  - sName: HairStrand11
+    transformPos: {x: 1.601471, y: 1.3386953, z: -1.7798746}
+    transformRot: {x: -0.4979154, y: -0, z: -0.15287298, w: 0.85364527}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand22
+    transformPos: {x: 1.4986975, y: 1.2818958, z: -1.7628503}
+    transformRot: {x: -0.47790968, y: -0, z: 0.5938643, w: 0.6472461}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand33
+    transformPos: {x: 1.5300767, y: 1.3279974, z: -1.6516426}
+    transformRot: {x: 0.5261645, y: -0, z: 0.21584825, w: 0.82253295}
+    slength: 0.09
+    segments: 9
+  - sName: HairStrand44
+    transformPos: {x: 1.5261282, y: 1.321565, z: -1.781826}
+    transformRot: {x: -0.54990554, y: -0, z: 0.2538445, w: 0.79571795}
+    slength: 0.09
+    segments: 9
+  - sName: HairStrand55
+    transformPos: {x: 1.5117639, y: 1.2529926, z: -1.6703382}
+    transformRot: {x: 0.607188, y: -0, z: 0.6014596, w: 0.51920056}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand66
+    transformPos: {x: 1.487348, y: 1.2629534, z: -1.7219845}
+    transformRot: {x: -0.06806767, y: -0, z: 0.8265122, w: 0.5587884}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand77
+    transformPos: {x: 1.5113103, y: 1.3160347, z: -1.7745577}
+    transformRot: {x: -0.48912615, y: -0, z: 0.38830286, w: 0.7810101}
+    slength: 0.09
+    segments: 9
+  - sName: HairStrand88
+    transformPos: {x: 1.5522785, y: 1.2989489, z: -1.6405842}
+    transformRot: {x: 0.6736704, y: -0, z: 0.11353862, w: 0.7302584}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand99
+    transformPos: {x: 1.5415722, y: 1.3539258, z: -1.6653725}
+    transformRot: {x: 0.35888234, y: -0, z: 0.14442071, w: 0.92214215}
+    slength: 0.1
+    segments: 10
+  - sName: HairStrand1010
+    transformPos: {x: 1.5696129, y: 1.3600591, z: -1.7669325}
+    transformRot: {x: -0.3490192, y: -0, z: 0.015944421, w: 0.93697995}
+    slength: 0.11
+    segments: 11
+  - sName: HairStrand1111
+    transformPos: {x: 1.617695, y: 1.3621312, z: -1.6844133}
+    transformRot: {x: 0.22084051, y: -0, z: -0.20043972, w: 0.9544913}
+    slength: 0.080000006
+    segments: 8
+  - sName: HairStrand1212
+    transformPos: {x: 1.5364912, y: 1.2528574, z: -1.780042}
+    transformRot: {x: -0.7512492, y: -0, z: 0.3963132, w: 0.5277885}
+    slength: 0.060000006
+    segments: 6
+  - sName: HairStrand1313
+    transformPos: {x: 1.4870496, y: 1.3212373, z: -1.7289337}
+    transformRot: {x: -0.09040515, y: -0, z: 0.57054013, w: 0.8162787}
+    slength: 0.080000006
+    segments: 8
+  - sName: HairStrand1414
+    transformPos: {x: 1.4982423, y: 1.2611022, z: -1.7520286}
+    transformRot: {x: -0.44402528, y: -0, z: 0.704612, w: 0.5535013}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand1515
+    transformPos: {x: 1.5050868, y: 1.3522252, z: -1.7143699}
+    transformRot: {x: 0.014163449, y: -0, z: 0.3898288, w: 0.92077845}
+    slength: 0.11
+    segments: 11
+  - sName: HairStrand1616
+    transformPos: {x: 1.5181267, y: 1.2357756, z: -1.7540425}
+    transformRot: {x: -0.60059315, y: -0, z: 0.6528167, w: 0.4616474}
+    slength: 0.050000004
+    segments: 5
+  - sName: HairStrand1717
+    transformPos: {x: 1.5655243, y: 1.3757006, z: -1.6958048}
+    transformRot: {x: 0.12796631, y: -0, z: 0.038049445, w: 0.99104846}
+    slength: 0.11
+    segments: 11
+  - sName: HairStrand1818
+    transformPos: {x: 1.6369061, y: 1.3353249, z: -1.7626642}
+    transformRot: {x: -0.3932849, y: -0, z: -0.35428283, w: 0.8484167}
+    slength: 0.060000006
+    segments: 6
+  - sName: HairStrand1919
+    transformPos: {x: 1.4962755, y: 1.2793816, z: -1.6740655}
+    transformRot: {x: 0.44907796, y: -0, z: 0.62627184, w: 0.6372698}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand2020
+    transformPos: {x: 1.5383323, y: 1.2736899, z: -1.6449816}
+    transformRot: {x: 0.7164006, y: -0, z: 0.25802022, w: 0.6482252}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand2121
+    transformPos: {x: 1.5545094, y: 1.3725157, z: -1.742404}
+    transformRot: {x: -0.16389248, y: -0, z: 0.08608105, w: 0.9827153}
+    slength: 0.11
+    segments: 11
+  - sName: HairStrand2222
+    transformPos: {x: 1.5816561, y: 1.2718209, z: -1.7938664}
+    transformRot: {x: -0.7289716, y: -0, z: -0.07111901, w: 0.6808397}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand2323
+    transformPos: {x: 1.618707, y: 1.3435131, z: -1.7699616}
+    transformRot: {x: -0.42172807, y: -0, z: -0.23357588, w: 0.8761209}
+    slength: 0.060000006
+    segments: 6
+  - sName: HairStrand2424
+    transformPos: {x: 1.5093256, y: 1.2511336, z: -1.7585737}
+    transformRot: {x: -0.56712425, y: -0, z: 0.6456988, w: 0.51131535}
+    slength: 0.060000006
+    segments: 6
+  - sName: HairStrand2525
+    transformPos: {x: 1.5909172, y: 1.3709506, z: -1.7473098}
+    transformRot: {x: -0.2004188, y: -0, z: -0.08226957, w: 0.9762501}
+    slength: 0.09
+    segments: 9
+  - sName: HairStrand2626
+    transformPos: {x: 1.4824795, y: 1.2867985, z: -1.7281469}
+    transformRot: {x: -0.114759564, y: -0, z: 0.7246034, w: 0.67954427}
+    slength: 0.09
+    segments: 9
+  - sName: HairStrand2727
+    transformPos: {x: 1.4913242, y: 1.3321456, z: -1.7092078}
+    transformRot: {x: 0.049295872, y: -0, z: 0.5170827, w: 0.85451484}
+    slength: 0.1
+    segments: 10
+  - sName: HairStrand2828
+    transformPos: {x: 1.5425465, y: 1.3645972, z: -1.7535435}
+    transformRot: {x: -0.24482864, y: -0, z: 0.14240968, w: 0.95905083}
+    slength: 0.1
+    segments: 10
+  - sName: HairStrand2929
+    transformPos: {x: 1.5878927, y: 1.354143, z: -1.7720042}
+    transformRot: {x: -0.39093712, y: -0, z: -0.07076317, w: 0.9176933}
+    slength: 0.12
+    segments: 12
+  - sName: HairStrand3030
+    transformPos: {x: 1.5227559, y: 1.365281, z: -1.7058232}
+    transformRot: {x: 0.06917576, y: -0, z: 0.2571678, w: 0.9638877}
+    slength: 0.1
+    segments: 10
+  - sName: HairStrand3131
+    transformPos: {x: 1.6290277, y: 1.3508967, z: -1.6775655}
+    transformRot: {x: 0.29195625, y: -0, z: -0.27401268, w: 0.9163399}
+    slength: 0.060000006
+    segments: 6
+  - sName: HairStrand3232
+    transformPos: {x: 1.635788, y: 1.3587627, z: -1.7067981}
+    transformRot: {x: 0.063085064, y: -0, z: -0.29385942, w: 0.9537647}
+    slength: 0.080000006
+    segments: 8
+  - sName: HairStrand3333
+    transformPos: {x: 1.5789324, y: 1.3398196, z: -1.6495273}
+    transformRot: {x: 0.5092967, y: -0, z: -0.03720866, w: 0.85978633}
+    slength: 0.12
+    segments: 12
+  - sName: HairStrand3434
+    transformPos: {x: 1.5806311, y: 1.3417228, z: -1.7821819}
+    transformRot: {x: -0.49309105, y: -0, z: -0.043618962, w: 0.86888367}
+    slength: 0.1
+    segments: 10
+  - sName: HairStrand3535
+    transformPos: {x: 1.6296343, y: 1.3198844, z: -1.7752178}
+    transformRot: {x: -0.50115794, y: -0, z: -0.2935598, w: 0.8140415}
+    slength: 0.050000004
+    segments: 5
+  - sName: HairStrand3636
+    transformPos: {x: 1.6584076, y: 1.333376, z: -1.7212378}
+    transformRot: {x: -0.03657694, y: -0, z: -0.5136398, w: 0.8572261}
+    slength: 0.060000006
+    segments: 6
+  - sName: HairStrand3737
+    transformPos: {x: 1.5502664, y: 1.3762053, z: -1.7130563}
+    transformRot: {x: 0.02204613, y: -0, z: 0.103383705, w: 0.9943973}
+    slength: 0.15
+    segments: 15
+  - sName: HairStrand3838
+    transformPos: {x: 1.6403228, y: 1.3496553, z: -1.6898831}
+    transformRot: {x: 0.19983031, y: -0, z: -0.34372133, w: 0.9175639}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand3939
+    transformPos: {x: 1.540196, y: 1.3725945, z: -1.72866}
+    transformRot: {x: -0.0781675, y: -0, z: 0.15485345, w: 0.9848403}
+    slength: 0.11
+    segments: 11
+  - sName: HairStrand4040
+    transformPos: {x: 1.5132109, y: 1.2254257, z: -1.7118225}
+    transformRot: {x: 0.06211537, y: -0, z: 0.9114884, w: 0.40660867}
+    slength: 0.050000004
+    segments: 5
+  - sName: HairStrand4141
+    transformPos: {x: 1.5729449, y: 1.3547093, z: -1.6603961}
+    transformRot: {x: 0.39477307, y: -0, z: 0.00084756315, w: 0.9187784}
+    slength: 0.12
+    segments: 12
+  - sName: HairStrand4242
+    transformPos: {x: 1.5837189, y: 1.3200308, z: -1.643092}
+    transformRot: {x: 0.6166613, y: -0, z: -0.08119613, w: 0.78303015}
+    slength: 0.1
+    segments: 10
+  - sName: HairStrand4343
+    transformPos: {x: 1.5925852, y: 1.3762517, z: -1.7239827}
+    transformRot: {x: -0.043289103, y: -0, z: -0.08905179, w: 0.99508595}
+    slength: 0.11
+    segments: 11
+  - sName: HairStrand4444
+    transformPos: {x: 1.5943426, y: 1.2614926, z: -1.6427313}
+    transformRot: {x: 0.7370882, y: -0, z: -0.09371528, w: 0.6692671}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand4545
+    transformPos: {x: 1.5214106, y: 1.3434302, z: -1.6658243}
+    transformRot: {x: 0.36533415, y: -0, z: 0.27601534, w: 0.8890143}
+    slength: 0.1
+    segments: 10
+  - sName: HairStrand4646
+    transformPos: {x: 1.5600616, y: 1.3340319, z: -1.6468556}
+    transformRot: {x: 0.5398678, y: -0, z: 0.06009178, w: 0.8396022}
+    slength: 0.1
+    segments: 10
+  - sName: HairStrand4747
+    transformPos: {x: 1.5075343, y: 1.2819678, z: -1.6607634}
+    transformRot: {x: 0.5696347, y: -0, z: 0.50682056, w: 0.6470312}
+    slength: 0.07000001
+    segments: 7
+  - sName: HairStrand4848
+    transformPos: {x: 1.4933715, y: 1.3129466, z: -1.7538427}
+    transformRot: {x: -0.3049838, y: -0, z: 0.5472068, w: 0.7794548}
+    slength: 0.1
+    segments: 10
+  - sName: HairStrand4949
+    transformPos: {x: 1.4885573, y: 1.3057209, z: -1.6855654}
+    transformRot: {x: 0.26278028, y: -0, z: 0.60240924, w: 0.75369084}
+    slength: 0.080000006
+    segments: 8

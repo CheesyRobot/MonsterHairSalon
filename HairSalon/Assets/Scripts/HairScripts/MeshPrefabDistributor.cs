@@ -25,12 +25,16 @@ public class MeshPrefabDistributor : MonoBehaviour
     [Header("Client Hair")]
     [Tooltip("Turn this off when the ClientGenerator spawns the hair, otherwise the hair is spawned twice.")]
     [SerializeField] private bool distributeOnStart = false;
+    [SerializeField] private bool distributeFromTargetContainer = true;
 
     private void Start()
     {
         if (!distributeOnStart) return;
-        DistributePrefabs();
-        Debug.Log(instantiatedPrefabsList.Count);
+        if(targetContainer != null && distributeFromTargetContainer)
+            GenerateHairstyle(targetContainer);
+        else
+            DistributePrefabs();
+        Debug.Log("Instantiated " + instantiatedPrefabsList.Count + " prefabs");
     }
 
     // Called by the ClientGenerator, swaps the old hair for the hair of the new client
@@ -39,7 +43,7 @@ public class MeshPrefabDistributor : MonoBehaviour
         prefab = newPrefab;
         targetPrefabCount = count;
         minDistance = distance;
-
+       
         ClearHair();
         DistributePrefabs();
     }
@@ -58,18 +62,59 @@ public class MeshPrefabDistributor : MonoBehaviour
             Debug.LogError($"[MeshPrefabDistributor] Hair Style {style.name} has no Hair Prefab assigned!", style);
             return;
         }
-
         SetupAndDistribute(style.hairPrefab, style.strandCount, style.minDistance);
     }
 
     // Removes all the hair strands that were spawned before
     public void ClearHair()
     {
-        foreach (var strand in instantiatedPrefabsList)
+        foreach (HairStrand strand in instantiatedPrefabsList)
         {
             if (strand != null) Destroy(strand.gameObject);
+            
         }
         instantiatedPrefabsList.Clear();
+    }
+
+    public void GenerateHairstyle(HairStyleSO style)
+    {
+        if (style == null)
+        {
+            Debug.LogError("[MeshPrefabDistributor] The hair profile has no Hair Style assigned!", this);
+            return;
+        }
+
+        if (style.hairPrefab == null)
+        {
+            Debug.LogError($"[MeshPrefabDistributor] Hair Style {style.name} has no Hair Prefab assigned!", style);
+            return;
+        }
+
+        ClearHair();
+        instantiatedPrefabsList = new List<HairStrand>();
+        foreach (HairStrandProperty strand in style.hairList)
+        {
+            
+#if UNITY_EDITOR
+            GameObject spawnedInstance = UnityEditor.PrefabUtility.InstantiatePrefab(style.hairPrefab, transform) as GameObject;
+            if (spawnedInstance != null)
+            {
+                spawnedInstance.transform.position = strand.transformPos;
+                spawnedInstance.transform.rotation = strand.transformRot;
+                UnityEditor.Undo.RegisterCreatedObjectUndo(spawnedInstance, "Distributed Prefab");
+            }
+#else
+                GameObject spawnedInstance = Instantiate(style.hairPrefab, strand.transformPos, strand.transformRot, transform);
+#endif
+            spawnedInstance.name = strand.sName;
+            HairStrand hair = spawnedInstance.GetComponent<HairStrand>();
+            // Set HairStrand properties
+            hair.SetTotalLength(strand.slength);
+            hair.SetTotalSegments(strand.segments);
+            // Regenerating the hairstrand anew to apply properties
+            hair.InitializeHairStrand();
+            instantiatedPrefabsList.Add(spawnedInstance.GetComponent<HairStrand>());
+        }
     }
 
     public void DistributePrefabs()
@@ -235,14 +280,26 @@ public class MeshPrefabDistributor : MonoBehaviour
             Debug.LogError("[MeshPrefabDistributor] Target Container (ScriptableObject) is not assigned!", this);
             return;
         }
-
+        Debug.Log("Save " + instantiatedPrefabsList.Count + " prefabs");
         if (instantiatedPrefabsList == null || instantiatedPrefabsList.Count == 0)
         {
             Debug.LogWarning("[MeshPrefabDistributor] No prefabs have been instantiated yet to save.", this);
             return;
         }
-
-        targetContainer.hairStrandsList = instantiatedPrefabsList;
+        List<HairStrandProperty> hairStrandProperties = new List<HairStrandProperty>();
+        int i = 0;
+        foreach (HairStrand prefab in instantiatedPrefabsList)
+        {
+            HairStrandProperty property = new HairStrandProperty();
+            property.sName = prefab.name + i;
+            property.transformPos = prefab.transform.position;
+            property.transformRot = prefab.transform.rotation;
+            property.slength = prefab.GetTotalLength();
+            property.segments = prefab.GetTotalSegments();
+            hairStrandProperties.Add(property);
+            i++;
+        }
+        targetContainer.hairList = hairStrandProperties;
 
 #if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(targetContainer);

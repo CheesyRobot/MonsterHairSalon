@@ -37,6 +37,7 @@ public class HairStrand : MonoBehaviour
     private List<HairSegment> segments = new List<HairSegment>();
     private LineRenderer lineRenderer;
     public float segmentLength;
+
     public Color BaseColor => baseColor; // the ClientGenerator reads this for the hair on the TV picture
 
     private bool colorsDirty;
@@ -44,24 +45,7 @@ public class HairStrand : MonoBehaviour
 
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        segmentLength = totalLength / segmentCount;
-
-        // Generating hair segments downwards and initializing their positions
-        Vector3 spawnPos = transform.position;
-        for (int i = 0; i < segmentCount; i++)
-        {
-            HairSegment segment = new HairSegment(spawnPos, hairThickness / 2f, baseColor);
-
-            // Create a collider for each segment to handle collisions
-            CreateSegmentCollider(segment, i);
-
-            segments.Add(segment);
-            spawnPos += Vector3.up * segmentLength;
-        }
-
-        lineRenderer.positionCount = segments.Count;
-        ApplyColors();
+        InitializeHairStrand();
     }
 
     void LateUpdate()
@@ -89,6 +73,28 @@ public class HairStrand : MonoBehaviour
     {
         SimulatePhysics();
         ApplyConstraints();
+    }
+
+    public void InitializeHairStrand()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+        segmentLength = totalLength / segmentCount;
+
+        // Generating hair segments upwards and initializing their positions
+        segments.Clear();
+        Vector3 spawnPos = transform.position;
+        for (int i = 0; i < segmentCount; i++)
+        {
+            HairSegment segment = new HairSegment(spawnPos, hairThickness / 2f, baseColor);
+
+            // Create a collider for each segment to handle collisions
+            CreateSegmentCollider(segment, i);
+
+            segments.Add(segment);
+            spawnPos += Vector3.up * segmentLength;
+        }
+        lineRenderer.positionCount = segments.Count;
+        ApplyColors();
     }
 
     private void SimulatePhysics()
@@ -196,13 +202,13 @@ public class HairStrand : MonoBehaviour
                 Destroy(segments[i].colliderObj);
             }
             // Updating length
-            //totalLength -= segmentLength;
+            totalLength -= segmentLength;
             segments.RemoveAt(i);
         }
 
         // Updating Line Renderer segments count
         lineRenderer.positionCount = segments.Count;
-        //segmentCount = segments.Count;
+        segmentCount = segments.Count;
         colorsDirty = true;
     }
 
@@ -264,5 +270,25 @@ public class HairStrand : MonoBehaviour
         var gradient = new Gradient();
         gradient.SetKeys(colorKeys, new[] { new GradientAlphaKey(1f, 0f), new GradientAlphaKey(1f, 1f) });
         lineRenderer.colorGradient = gradient;
+    }
+
+    public float GetTotalLength()
+    {
+        return totalLength;
+    }
+
+    public int GetTotalSegments()
+    {
+        return segmentCount;
+    }
+
+    public void SetTotalLength(float value)
+    {
+        totalLength = value;
+    }
+
+    public void SetTotalSegments(int value)
+    {
+        segmentCount = value;
     }
 }
