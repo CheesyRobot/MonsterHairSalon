@@ -106,7 +106,7 @@ public class ClientGenerator : MonoBehaviour
         {
             if (profile.type == currentType)
             {
-                if (hairDistributor != null) hairDistributor.SetupAndDistribute(profile.hairStyle);
+                if (hairDistributor != null) hairDistributor.GenerateHairstyle(profile.hairStyle);//hairDistributor.SetupAndDistribute(profile.hairStyle);
                 return;
             }
         }
