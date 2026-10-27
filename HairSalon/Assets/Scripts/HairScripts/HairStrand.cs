@@ -37,6 +37,7 @@ public class HairStrand : MonoBehaviour
     private List<HairSegment> segments = new List<HairSegment>();
     private LineRenderer lineRenderer;
     public float segmentLength;
+    public Color BaseColor => baseColor; // the ClientGenerator reads this for the hair on the TV picture
 
     private bool colorsDirty;
     private const int MaxGradientKeys = 8;

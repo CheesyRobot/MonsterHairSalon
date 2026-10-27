@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ClientGenerator : MonoBehaviour
 {
@@ -52,6 +53,13 @@ public class ClientGenerator : MonoBehaviour
 
     private MaterialPropertyBlock skinBlock;
 
+    [Header("Client Picture")]
+    public Image faceImage; //gets the skin color of the client type
+    public Image hairImage; //gets the color of the client's hair
+
+    [Header("Client Character")]
+    public GameObject clientObject; //StylizedFemale, only shown after the client is accepted
+
     //The client that is currently shown on the TV
     public string currentName { get; private set; }
     public string currentType { get; private set; }
@@ -69,8 +77,9 @@ public class ClientGenerator : MonoBehaviour
         currentName = names[Random.Range(0, names.Length)];
         currentType = types[Random.Range(0, types.Length)];
 
-        SpawnHair();
-        SetSkin();
+        //The character is hidden until the client is accepted, the TV picture shows the client before that
+        if (clientObject != null) clientObject.SetActive(false);
+        SetPicture();
 
         //How many things this client wants (Random.Range with ints leaves out the max value)
         int count = Mathf.Min(Random.Range(1, maxWants + 1), wants.Length);
@@ -93,36 +102,73 @@ public class ClientGenerator : MonoBehaviour
     //Finds the hair profile of the current type and spawns that hair on the head
     private void SpawnHair()
     {
-        if (hairDistributor == null) return;
-
         foreach (var profile in hairProfiles)
         {
             if (profile.type == currentType)
             {
-                hairDistributor.SetupAndDistribute(profile.hairStyle);
+                if (hairDistributor != null) hairDistributor.SetupAndDistribute(profile.hairStyle);
                 return;
             }
         }
         Debug.LogWarning("No hair profile for type " + currentType);
     }
 
+    //Colors the face and hair on the TV picture for the current type
+    private void SetPicture()
+    {
+        foreach (var profile in skinProfiles)
+        {
+            if (profile.type == currentType)
+            {
+                if (faceImage != null) faceImage.color = ToUIColor(profile.skinColor);
+                break;
+            }
+        }
+
+        foreach (var profile in hairProfiles)
+        {
+            if (profile.type == currentType)
+            {
+                SetHairPicture(profile.hairStyle);
+                break;
+            }
+        }
+    }
+
+    //UI colors can't go above 1, so bright HDR colors are scaled down instead of turning white
+    private Color ToUIColor(Color color)
+    {
+        float max = Mathf.Max(color.r, color.g, color.b);
+        if (max > 1f) color /= max;
+        color.a = 1f;
+        return color;
+    }
+
+    //Colors the hair on the TV picture with the color of the hair prefab
+    private void SetHairPicture(HairStyleSO style)
+    {
+        if (hairImage == null || style == null || style.hairPrefab == null) return;
+        if (style.hairPrefab.TryGetComponent(out HairStrand strand)) hairImage.color = strand.BaseColor;
+    }
+
     //Finds the skin profile of the current type and tints the skin with it
     private void SetSkin()
     {
-        if (skinTargets == null || skinTargets.Length == 0) return;
-
         foreach (var profile in skinProfiles)
         {
             if (profile.type == currentType)
             {
                 //property block tints these renderers only and doesn't change the material asset
                 if (skinBlock == null) skinBlock = new MaterialPropertyBlock();
-                foreach (var target in skinTargets)
+                if (skinTargets != null)
                 {
-                    if (target.renderer == null) continue;
-                    target.renderer.GetPropertyBlock(skinBlock, target.materialIndex);
-                    skinBlock.SetColor(colorProperty, profile.skinColor);
-                    target.renderer.SetPropertyBlock(skinBlock, target.materialIndex);
+                    foreach (var target in skinTargets)
+                    {
+                        if (target.renderer == null) continue;
+                        target.renderer.GetPropertyBlock(skinBlock, target.materialIndex);
+                        skinBlock.SetColor(colorProperty, profile.skinColor);
+                        target.renderer.SetPropertyBlock(skinBlock, target.materialIndex);
+                    }
                 }
                 return;
             }
@@ -130,10 +176,19 @@ public class ClientGenerator : MonoBehaviour
         Debug.LogWarning("No skin profile for type " + currentType);
     }
 
+    //Shows the character on the chair and gives her the hair and skin of the current type
+    private void SpawnClient()
+    {
+        if (clientObject != null) clientObject.SetActive(true);
+        SpawnHair();
+        SetSkin();
+    }
+
     //Hook this to the On Pressed event of the yes button
     public void Accept()
     {
         Debug.Log("Accepted " + currentName + " the " + currentType + " who wants: " + string.Join(", ", currentWants));
+        SpawnClient();
 
     }
 
