@@ -155,6 +155,6 @@ public class HairReviewSystem : MonoBehaviour
     private static string Stars(int n)
     {
         n = Mathf.Clamp(n, 0, 5);
-        return new string('*', n) + new string('*', 5 - n);
+        return new string('*', n);
     }
 }
