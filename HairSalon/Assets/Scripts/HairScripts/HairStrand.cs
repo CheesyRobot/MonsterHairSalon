@@ -38,6 +38,9 @@ public class HairStrand : MonoBehaviour
     private LineRenderer lineRenderer;
     public float segmentLength;
 
+    private float startLength;
+    public float StartLength => startLength;
+
     public Color BaseColor => baseColor; // the ClientGenerator reads this for the hair on the TV picture
 
     private bool colorsDirty;
@@ -78,6 +81,7 @@ public class HairStrand : MonoBehaviour
     public void InitializeHairStrand()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        startLength = totalLength;
         segmentLength = totalLength / segmentCount;
 
         // Generating hair segments upwards and initializing their positions
@@ -290,5 +294,13 @@ public class HairStrand : MonoBehaviour
     public void SetTotalSegments(int value)
     {
         segmentCount = value;
+    }
+
+    public Color GetAverageColor()
+    {
+        if (segments.Count == 0) return baseColor;
+        Color sum = Color.black;
+        for (int i = 0; i < segments.Count; i++) sum += segments[i].color;
+        return sum / segments.Count;
     }
 }

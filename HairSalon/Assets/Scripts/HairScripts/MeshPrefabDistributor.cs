@@ -27,6 +27,8 @@ public class MeshPrefabDistributor : MonoBehaviour
     [SerializeField] private bool distributeOnStart = false;
     [SerializeField] private bool distributeFromTargetContainer = true;
 
+    public IReadOnlyList<HairStrand> Strands => instantiatedPrefabsList;
+
     private void Start()
     {
         if (!distributeOnStart) return;
