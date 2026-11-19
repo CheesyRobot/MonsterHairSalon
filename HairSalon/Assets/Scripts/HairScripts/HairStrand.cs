@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 [RequireComponent(typeof(LineRenderer))]
 public class HairStrand : MonoBehaviour
@@ -33,6 +34,8 @@ public class HairStrand : MonoBehaviour
     [SerializeField] private Vector3 gravity = new Vector3(0, -9.81f, 0);
     [SerializeField] private int physicsIterations = 5;
     [SerializeField] private LayerMask collisionMask;
+    [SerializeField] private float factor1 = 0.5f;
+    [SerializeField] private float factor2 = 0.5f;
 
     private List<HairSegment> segments = new List<HairSegment>();
     private LineRenderer lineRenderer;
@@ -99,6 +102,7 @@ public class HairStrand : MonoBehaviour
 
     private void SimulatePhysics()
     {
+        Profiler.BeginSample("SimulateHairPhysics");
         // Verlet integration
         for (int i = 1; i < segments.Count; i++)
         {
@@ -107,10 +111,13 @@ public class HairStrand : MonoBehaviour
             s.oldPos = s.currentPos;
             s.currentPos += velocity + gravity * Time.fixedDeltaTime * Time.fixedDeltaTime;
         }
+        Profiler.EndSample();
     }
 
     private void ApplyConstraints()
     {
+
+        Profiler.BeginSample("Constraints");
         // First segment stays in place
         segments[0].currentPos = transform.position;
 
@@ -126,20 +133,13 @@ public class HairStrand : MonoBehaviour
                 float error = Mathf.Abs(dist - segmentLength);
                 Vector3 changeDir = Vector3.zero;
 
-                if (dist > segmentLength)
-                {
-                    changeDir = (first.currentPos - second.currentPos).normalized;
-                }
-                else if (dist < segmentLength)
-                {
-                    changeDir = (second.currentPos - first.currentPos).normalized;
-                }
+                changeDir = (first.currentPos - second.currentPos).normalized;
 
                 Vector3 changeAmount = changeDir * error;
                 if (i != 0)
                 {
-                    first.currentPos -= changeAmount * 0.5f;
-                    second.currentPos += changeAmount * 0.5f;
+                    first.currentPos -= changeAmount * factor1;
+                    second.currentPos += changeAmount * factor2;
                 }
                 else
                 {
@@ -147,7 +147,19 @@ public class HairStrand : MonoBehaviour
                     second.currentPos += changeAmount;
                 }
             }
+
+            /*HairSegment fir = segments[0];
+            HairSegment last = segments[segments.Count - 1];
+            // Same distance calculation as above, but less optimal.
+            float distance = Vector2.Distance(fir.currentPos, last.currentPos);
+            if (distance > 0 && distance > segments.Count * segmentLength)
+            {
+                Vector3 dir = (last.currentPos - fir.currentPos).normalized;
+                last.currentPos = fir.currentPos + segments.Count * segmentLength * dir;
+            }*/
         }
+
+        
 
         // Collisions using Physics.OverlapSphere
         for (int i = 1; i < segments.Count; i++)
@@ -169,6 +181,7 @@ public class HairStrand : MonoBehaviour
                 }
             }
         }
+        Profiler.EndSample();
     }
 
     private void CreateSegmentCollider(HairSegment segment, int index)

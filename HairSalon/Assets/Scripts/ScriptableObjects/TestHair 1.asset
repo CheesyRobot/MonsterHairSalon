@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82d2429fe1af9744a0e4d11c658cf5e, type: 3}
   m_Name: TestHair 1
   m_EditorClassIdentifier: Assembly-CSharp::HairStyleSO
-  hairPrefab: {fileID: 1092909662484426529, guid: 266b46802cd68ce45ac1eebf2b7e1f69, type: 3}
+  hairPrefab: {fileID: 1092909662484426529, guid: 24f41e1f428b6434fa3b68db9e0b40d4, type: 3}
   strandCount: 50
   minDistance: 0.016
   hairList:

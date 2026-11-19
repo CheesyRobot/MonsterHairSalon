@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class HairKnotConnector : MonoBehaviour
 {
+    private HairStrandJob mainHairScriptJob;
     private HairStrand mainHairScript;
     private int knotIndex;
 
@@ -15,13 +16,22 @@ public class HairKnotConnector : MonoBehaviour
         knotIndex = index;
     }
 
+    public void Setup(HairStrandJob hairScript, int index)
+    {
+        mainHairScriptJob = hairScript;
+        knotIndex = index;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         // Checking if the colliding object is the scissors or paintbrush
         if (other.gameObject.name == "Scissors")// || other.CompareTag("Scissors"))
         {
             Debug.Log($"Hair cut at segment: {knotIndex}");
-            mainHairScript.CutHairAt(knotIndex);
+            /*if (mainHairScriptJob != null)
+            { mainHairScriptJob.CutHairAt(knotIndex); }
+            else*/ if (mainHairScript != null)
+                mainHairScript.CutHairAt(knotIndex);
         }
         else if (other.gameObject.name == "PaintBrush")
         {
