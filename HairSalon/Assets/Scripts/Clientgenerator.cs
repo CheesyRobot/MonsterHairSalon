@@ -18,6 +18,8 @@ public class ClientGenerator : MonoBehaviour
     //How many things a client can want at most, every client wants at least 1
     public int maxWants = 3;
 
+    private bool clientAccepted;
+
     //The hair a client type gets, the type has to be written exactly like in the types list
     [System.Serializable]
     public class HairProfile
@@ -60,6 +62,15 @@ public class ClientGenerator : MonoBehaviour
     [Header("Client Character")]
     public GameObject clientObject; //StylizedFemale, only shown after the client is accepted
 
+    [Header("Review")]
+    public HairReviewSystem reviewSystem;
+    public Color[] dyeColors = { Color.red, Color.blue, Color.green, Color.magenta, Color.yellow };
+    public float nextClientDelay = 6f;
+    public Image targetColorImage; // optional swatch on the TV, shown only for dyeing clients
+
+    public float targetLengthRatio { get; private set; }
+    public Color targetColor { get; private set; }
+
     //The client that is currently shown on the TV
     public string currentName { get; private set; }
     public string currentType { get; private set; }
@@ -74,6 +85,7 @@ public class ClientGenerator : MonoBehaviour
     //Picks a random name, monster type and 1 to maxWants different wishes and shows them on the TV
     public void NextClient()
     {
+        CancelInvoke(nameof(NextClient));
         currentName = names[Random.Range(0, names.Length)];
         currentType = types[Random.Range(0, types.Length)];
 
@@ -97,6 +109,24 @@ public class ClientGenerator : MonoBehaviour
         clientText.text = "Client: " + currentName;
         typeText.text = "Type: " + currentType;
         wantsText.text = "Wants: " + string.Join(", ", currentWants);
+
+        if (currentWants.Contains("Haircut")) targetLengthRatio = Random.Range(0.3f, 0.6f);
+        else if (currentWants.Contains("Hair trim")) targetLengthRatio = Random.Range(0.8f, 0.9f);
+        else targetLengthRatio = 1f;
+
+        bool wantsDye = currentWants.Contains("Hair dyeing");
+        targetColor = wantsDye ? dyeColors[Random.Range(0, dyeColors.Length)] : OriginalHairColor();
+        if (targetColorImage != null)
+        {
+            targetColorImage.gameObject.SetActive(wantsDye);
+            targetColorImage.color = targetColor;
+        }
+
+        // Tell the player the wanted length
+        List<string> shown = new List<string>();
+        foreach (string w in currentWants)
+            shown.Add((w == "Haircut" || w == "Hair trim") ? w + " (to " + Mathf.RoundToInt(targetLengthRatio * 100) + "%)" : w);
+        wantsText.text = "Wants: " + string.Join(", ", shown);
     }
 
     //Finds the hair profile of the current type and spawns that hair on the head
@@ -187,15 +217,37 @@ public class ClientGenerator : MonoBehaviour
     //Hook this to the On Pressed event of the yes button
     public void Accept()
     {
+        if (clientAccepted || IsInvoking(nameof(NextClient))) return; // already serving, or review is showing
+        clientAccepted = true;
+
         Debug.Log("Accepted " + currentName + " the " + currentType + " who wants: " + string.Join(", ", currentWants));
         SpawnClient();
-
+        if (reviewSystem != null) reviewSystem.BeginSession(targetLengthRatio, targetColor, currentWants.Count);
     }
 
     //Turns the client away and shows a new one
     public void Decline()
     {
+        if (clientAccepted) return; // can't turn away someone already in the chair
         Debug.Log("Declined " + currentName);
         NextClient();
+    }
+
+    private Color OriginalHairColor()
+    {
+        foreach (var profile in hairProfiles)
+            if (profile.type == currentType && profile.hairStyle != null && profile.hairStyle.hairPrefab != null
+                && profile.hairStyle.hairPrefab.TryGetComponent(out HairStrand strand))
+                return strand.BaseColor;
+        return Color.white;
+    }
+
+    // Hook this to a Done button
+    public void Finish()
+    {
+        if (!clientAccepted || reviewSystem == null) return;
+        clientAccepted = false;
+        reviewSystem.Finish();
+        Invoke(nameof(NextClient), nextClientDelay);
     }
 }
