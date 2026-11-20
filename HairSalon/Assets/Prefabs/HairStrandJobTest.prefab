@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1768068001729914693}
   - component: {fileID: 1547598675866358549}
   - component: {fileID: 160058051293007486}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 7216261970484656142}
   - component: {fileID: 417197274195446218}
   - component: {fileID: 5648549412556996700}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HairStrandJobTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,8 +256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83568c82367bf2448e3a286c889937a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HairStrandJob
-  segmentCount: 30
-  totalLength: 0.3
+  segmentCount: 15
+  totalLength: 0.5
   hairThickness: 0.02
   baseColor: {r: 1, g: 1, b: 1, a: 1}
   gravity:
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 1985199546739392163}
   - component: {fileID: 5947082422890537283}
   - component: {fileID: 2300911050886336720}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

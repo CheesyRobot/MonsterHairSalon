@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1768068001729914693}
   - component: {fileID: 1547598675866358549}
   - component: {fileID: 160058051293007486}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 7216261970484656142}
   - component: {fileID: 417197274195446218}
   - component: {fileID: 3406296441110601982}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HairStrand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,6 +265,8 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 1
+  factor1: 0.5
+  factor2: 0.5
   segmentLength: 0
 --- !u!1 &5045554762995988590
 GameObject:
@@ -277,7 +279,7 @@ GameObject:
   - component: {fileID: 1985199546739392163}
   - component: {fileID: 5947082422890537283}
   - component: {fileID: 2300911050886336720}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

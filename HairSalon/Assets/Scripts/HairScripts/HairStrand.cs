@@ -76,6 +76,7 @@ public class HairStrand : MonoBehaviour
     {
         SimulatePhysics();
         ApplyConstraints();
+        ApplyCollisions();
     }
 
     public void InitializeHairStrand()
@@ -85,7 +86,7 @@ public class HairStrand : MonoBehaviour
 
         // Generating hair segments upwards and initializing their positions
         segments.Clear();
-        Vector3 spawnPos = transform.position;
+        Vector3 spawnPos = transform.position+0.01f*transform.up;
         for (int i = 0; i < segmentCount; i++)
         {
             HairSegment segment = new HairSegment(spawnPos, hairThickness / 2f, baseColor);
@@ -161,6 +162,13 @@ public class HairStrand : MonoBehaviour
 
         
 
+        
+        Profiler.EndSample();
+    }
+
+    private void ApplyCollisions()
+    {
+        Profiler.BeginSample("Collisions");
         // Collisions using Physics.OverlapSphere
         for (int i = 1; i < segments.Count; i++)
         {

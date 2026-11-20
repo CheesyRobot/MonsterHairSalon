@@ -38,6 +38,7 @@ public class HairStrandJob : MonoBehaviour
     [SerializeField] private float3 gravity = new float3(0, -9.81f, 0);
     [SerializeField] private int physicsIterations = 5;
     [SerializeField] private LayerMask collisionMask;
+    private int rootFloat = 3;
     [SerializeField] private float factor1 = 0.5f;
     [SerializeField] private float factor2 = 0.5f;
 
@@ -120,12 +121,22 @@ public class HairStrandJob : MonoBehaviour
     {
         Profiler.BeginSample("SimulateHairPhysics");
         // Verlet integration
-        for (int i = 1; i < segments.Count; i++)
+        float3 upVector = 8*transform.up.normalized*-math.dot(transform.up,gravity);
+        for(int i = 1; i < rootFloat; i++)
+        {
+            float gravityImpact = (1-(float)(i+1)/rootFloat);
+            HairSegment s = segments[i];
+            float3 velocity = s.currentPos - s.oldPos;
+            s.oldPos = s.currentPos;
+            s.currentPos += velocity + Time.fixedDeltaTime * Time.fixedDeltaTime * (upVector+gravityImpact*gravity);
+            segments[i] = s;
+        }
+        for (int i = rootFloat; i < segments.Count; i++)
         {
             HairSegment s = segments[i];
             float3 velocity = s.currentPos - s.oldPos;
             s.oldPos = s.currentPos;
-            s.currentPos += velocity + gravity * Time.fixedDeltaTime * Time.fixedDeltaTime;
+            s.currentPos += velocity + Time.fixedDeltaTime * Time.fixedDeltaTime*gravity;
             segments[i] = s;
         }
 
