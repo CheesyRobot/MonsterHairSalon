@@ -16,6 +16,7 @@ public class MeshPrefabDistributorJob : MonoBehaviour
     [Tooltip("How many times the script will try to find a valid spot for a single prefab before skipping it to prevent freezing.")]
     [SerializeField] private int maxAttemptsPerPrefab = 30;
 
+    [SerializeField]
     private List<HairStrandJob> instantiatedPrefabsList = new List<HairStrandJob>();
 
     [Header("Data Saving")]
@@ -27,10 +28,12 @@ public class MeshPrefabDistributorJob : MonoBehaviour
     [SerializeField] private bool distributeOnStart = false;
     [SerializeField] private bool distributeFromTargetContainer = true;
 
+    public IReadOnlyList<HairStrandJob> Strands => instantiatedPrefabsList;
+
     private void Start()
     {
         if (!distributeOnStart) return;
-        if(targetContainer != null && distributeFromTargetContainer)
+        if (targetContainer != null && distributeFromTargetContainer)
             GenerateHairstyle(targetContainer);
         else
             DistributePrefabs();
@@ -43,7 +46,7 @@ public class MeshPrefabDistributorJob : MonoBehaviour
         prefab = newPrefab;
         targetPrefabCount = count;
         minDistance = distance;
-       
+
         ClearHair();
         DistributePrefabs();
     }
@@ -71,7 +74,7 @@ public class MeshPrefabDistributorJob : MonoBehaviour
         foreach (HairStrandJob strand in instantiatedPrefabsList)
         {
             if (strand != null) Destroy(strand.gameObject);
-            
+
         }
         instantiatedPrefabsList.Clear();
     }
@@ -94,7 +97,7 @@ public class MeshPrefabDistributorJob : MonoBehaviour
         instantiatedPrefabsList = new List<HairStrandJob>();
         foreach (HairStrandProperty strand in style.hairList)
         {
-            
+
 #if UNITY_EDITOR
             GameObject spawnedInstance = UnityEditor.PrefabUtility.InstantiatePrefab(style.hairPrefab, transform) as GameObject;
             if (spawnedInstance != null)
@@ -107,7 +110,7 @@ public class MeshPrefabDistributorJob : MonoBehaviour
                 GameObject spawnedInstance = Instantiate(style.hairPrefab, strand.transformPos, strand.transformRot, transform);
 #endif
             spawnedInstance.name = strand.sName;
-            HairStrand hair = spawnedInstance.GetComponent<HairStrand>();
+            HairStrandJob hair = spawnedInstance.GetComponent<HairStrandJob>();
             // Set HairStrand properties
             hair.SetTotalLength(strand.slength);
             hair.SetTotalSegments(strand.segments);

@@ -1,0 +1,543 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82d2429fe1af9744a0e4d11c658cf5e, type: 3}
+  m_Name: Short
+  m_EditorClassIdentifier: Assembly-CSharp::HairStyleSO
+  hairPrefab: {fileID: 1092909662484426529, guid: 4164c5a120b161146bbdd3e583344bd8, type: 3}
+  strandCount: 50
+  minDistance: 0.016
+  hairList:
+  - sName: HairStrandJobTest00
+    transformPos: {x: 1.4815452, y: 1.2950267, z: -1.708568}
+    transformRot: {x: 0.072279274, y: -0, z: 0.69427836, w: 0.7160681}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest11
+    transformPos: {x: 1.5134571, y: 1.225212, z: -1.7107891}
+    transformRot: {x: 0.076359004, y: -0, z: 0.91035044, w: 0.40673262}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest22
+    transformPos: {x: 1.5226349, y: 1.2655895, z: -1.6546757}
+    transformRot: {x: 0.678818, y: -0, z: 0.4472309, w: 0.5824008}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest33
+    transformPos: {x: 1.5756321, y: 1.3282803, z: -1.7887017}
+    transformRot: {x: -0.579183, y: -0, z: -0.025969625, w: 0.81478393}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest44
+    transformPos: {x: 1.4960274, y: 1.3411579, z: -1.7198755}
+    transformRot: {x: -0.021752998, y: -0, z: 0.4683389, w: 0.88328123}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest55
+    transformPos: {x: 1.6011482, y: 1.3660647, z: -1.6805124}
+    transformRot: {x: 0.24265158, y: -0, z: -0.13020009, w: 0.9613368}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest66
+    transformPos: {x: 1.49185, y: 1.3327268, z: -1.7063076}
+    transformRot: {x: 0.06876634, y: -0, z: 0.5123038, w: 0.8560468}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest77
+    transformPos: {x: 1.6328462, y: 1.358763, z: -1.6981995}
+    transformRot: {x: 0.12242073, y: -0, z: -0.28046516, w: 0.95202553}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest88
+    transformPos: {x: 1.6192782, y: 1.3491955, z: -1.6679628}
+    transformRot: {x: 0.36521935, y: -0, z: -0.22443438, w: 0.90346235}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest99
+    transformPos: {x: 1.6198518, y: 1.3659979, z: -1.7350938}
+    transformRot: {x: -0.11684814, y: -0, z: -0.20681527, w: 0.97137743}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest1010
+    transformPos: {x: 1.5617537, y: 1.3600084, z: -1.766211}
+    transformRot: {x: -0.34327316, y: -0, z: 0.050981596, w: 0.93785095}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest1111
+    transformPos: {x: 1.5275891, y: 1.3672262, z: -1.7319595}
+    transformRot: {x: -0.09979128, y: -0, z: 0.22370958, w: 0.9695338}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest1212
+    transformPos: {x: 1.6085465, y: 1.3363515, z: -1.7787187}
+    transformRot: {x: -0.50352293, y: -0, z: -0.1906439, w: 0.842686}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest1313
+    transformPos: {x: 1.5310228, y: 1.3617306, z: -1.751626}
+    transformRot: {x: -0.23095769, y: -0, z: 0.20438653, w: 0.9512544}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest1414
+    transformPos: {x: 1.5101609, y: 1.3297632, z: -1.7675412}
+    transformRot: {x: -0.3897921, y: -0, z: 0.38159302, w: 0.83812237}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest1515
+    transformPos: {x: 1.5461127, y: 1.3748763, z: -1.7075853}
+    transformRot: {x: 0.057072278, y: -0, z: 0.123598814, w: 0.99068975}
+    slength: 0.23333335
+    segments: 7
+  - sName: HairStrandJobTest1616
+    transformPos: {x: 1.5117091, y: 1.3147357, z: -1.657657}
+    transformRot: {x: 0.5006726, y: -0, z: 0.3854469, w: 0.77508575}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest1717
+    transformPos: {x: 1.6145477, y: 1.3020364, z: -1.6467658}
+    transformRot: {x: 0.6280757, y: -0, z: -0.19537702, w: 0.7532257}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest1818
+    transformPos: {x: 1.5655771, y: 1.3091255, z: -1.7931304}
+    transformRot: {x: -0.64809394, y: -0, z: 0.038078904, w: 0.76060796}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest1919
+    transformPos: {x: 1.6243143, y: 1.3662938, z: -1.7148076}
+    transformRot: {x: 0.01014328, y: -0, z: -0.22385393, w: 0.97457}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest2020
+    transformPos: {x: 1.553348, y: 1.358159, z: -1.6662444}
+    transformRot: {x: 0.3488832, y: -0, z: 0.08646041, w: 0.93316936}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest2121
+    transformPos: {x: 1.6005533, y: 1.3409871, z: -1.6539452}
+    transformRot: {x: 0.4876507, y: -0, z: -0.14768513, w: 0.8604569}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest2222
+    transformPos: {x: 1.5940101, y: 1.3764524, z: -1.716635}
+    transformRot: {x: -0.0006874874, y: -0, z: -0.09568668, w: 0.99541134}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest2323
+    transformPos: {x: 1.5171233, y: 1.2337725, z: -1.6822461}
+    transformRot: {x: 0.55364347, y: -0, z: 0.69886696, w: 0.45284006}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest2424
+    transformPos: {x: 1.6256417, y: 1.3476826, z: -1.761765}
+    transformRot: {x: -0.34627342, y: -0, z: -0.26324284, w: 0.9004432}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest2525
+    transformPos: {x: 1.5498515, y: 1.3700186, z: -1.7470781}
+    transformRot: {x: -0.19652414, y: -0, z: 0.10601184, w: 0.9747511}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest2626
+    transformPos: {x: 1.5403117, y: 1.3540816, z: -1.7670084}
+    transformRot: {x: -0.35381687, y: -0, z: 0.15101613, w: 0.92304265}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest2727
+    transformPos: {x: 1.4924304, y: 1.3086969, z: -1.6788682}
+    transformRot: {x: 0.31619924, y: -0, z: 0.56433886, w: 0.7625876}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest2828
+    transformPos: {x: 1.5127729, y: 1.3502029, z: -1.683144}
+    transformRot: {x: 0.22689784, y: -0, z: 0.33545566, w: 0.91432333}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest2929
+    transformPos: {x: 1.5177836, y: 1.2582618, z: -1.7713302}
+    transformRot: {x: -0.66493195, y: -0, z: 0.51304156, w: 0.54282045}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest3030
+    transformPos: {x: 1.5127848, y: 1.3507899, z: -1.7488896}
+    transformRot: {x: -0.21953161, y: -0, z: 0.33458582, w: 0.9164379}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest3131
+    transformPos: {x: 1.56848, y: 1.315939, z: -1.64115}
+    transformRot: {x: 0.6365066, y: -0, z: 0.010588765, w: 0.77119863}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest3232
+    transformPos: {x: 1.5017141, y: 1.2476227, z: -1.6890737}
+    transformRot: {x: 0.39063284, y: -0, z: 0.77868605, w: 0.49097258}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest3333
+    transformPos: {x: 1.483692, y: 1.2781752, z: -1.729468}
+    transformRot: {x: -0.13857386, y: -0, z: 0.7565335, w: 0.6391043}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest3434
+    transformPos: {x: 1.4925208, y: 1.2818209, z: -1.6789234}
+    transformRot: {x: 0.391685, y: -0, z: 0.6515658, w: 0.64965}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest3535
+    transformPos: {x: 1.485018, y: 1.3060056, z: -1.6957675}
+    transformRot: {x: 0.17482097, y: -0, z: 0.62833965, w: 0.7580416}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest3636
+    transformPos: {x: 1.5912048, y: 1.3725638, z: -1.7430252}
+    transformRot: {x: -0.16839615, y: -0, z: -0.08342459, w: 0.98218286}
+    slength: 0.23333335
+    segments: 7
+  - sName: HairStrandJobTest3737
+    transformPos: {x: 1.5992059, y: 1.2785388, z: -1.6419774}
+    transformRot: {x: 0.7073456, y: -0, z: -0.118092924, w: 0.69693357}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest3838
+    transformPos: {x: 1.5103538, y: 1.2943627, z: -1.7760878}
+    transformRot: {x: -0.56696624, y: -0, z: 0.43851286, w: 0.69732046}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest3939
+    transformPos: {x: 1.5385714, y: 1.2382776, z: -1.7709644}
+    transformRot: {x: -0.772681, y: -0, z: 0.43354976, w: 0.46367976}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest4040
+    transformPos: {x: 1.5919514, y: 1.3208039, z: -1.6444982}
+    transformRot: {x: 0.6041405, y: -0, z: -0.12033613, w: 0.7877396}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest4141
+    transformPos: {x: 1.5747418, y: 1.3668917, z: -1.7578605}
+    transformRot: {x: -0.27741084, y: -0, z: -0.00682956, w: 0.9607273}
+    slength: 0.23333335
+    segments: 7
+  - sName: HairStrandJobTest4242
+    transformPos: {x: 1.5830367, y: 1.3508576, z: -1.6574925}
+    transformRot: {x: 0.42287558, y: -0, z: -0.048454657, w: 0.9048914}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest4343
+    transformPos: {x: 1.5175685, y: 1.3624963, z: -1.7102576}
+    transformRot: {x: 0.03984894, y: -0, z: 0.29369557, w: 0.9550681}
+    slength: 0.23333335
+    segments: 7
+  - sName: HairStrandJobTest4444
+    transformPos: {x: 1.5388975, y: 1.2339872, z: -1.6652957}
+    transformRot: {x: 0.7713046, y: -0, z: 0.43912363, w: 0.46071655}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest4545
+    transformPos: {x: 1.5452466, y: 1.3433017, z: -1.6547587}
+    transformRot: {x: 0.45368147, y: -0, z: 0.12284733, w: 0.88265616}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest4646
+    transformPos: {x: 1.5646248, y: 1.2858295, z: -1.6387396}
+    transformRot: {x: 0.6996777, y: -0, z: 0.02714327, w: 0.7139429}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest4747
+    transformPos: {x: 1.6473855, y: 1.3292389, z: -1.6777825}
+    transformRot: {x: 0.3408888, y: -0, z: -0.42653543, w: 0.83777237}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest4848
+    transformPos: {x: 1.4943731, y: 1.265903, z: -1.7491337}
+    transformRot: {x: -0.39220038, y: -0, z: 0.7172744, w: 0.5759309}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest4949
+    transformPos: {x: 1.5679034, y: 1.3686168, z: -1.6780813}
+    transformRot: {x: 0.25383288, y: -0, z: 0.026459083, w: 0.9668863}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest5050
+    transformPos: {x: 1.5637903, y: 1.3414662, z: -1.6505295}
+    transformRot: {x: 0.48925176, y: -0, z: 0.04325345, w: 0.87106943}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest5151
+    transformPos: {x: 1.5397671, y: 1.2512586, z: -1.781017}
+    transformRot: {x: -0.7558034, y: -0, z: 0.3977148, w: 0.5201772}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest5252
+    transformPos: {x: 1.5917066, y: 1.3010491, z: -1.7926025}
+    transformRot: {x: -0.66175765, y: -0, z: -0.10200423, w: 0.74274635}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest5353
+    transformPos: {x: 1.4942608, y: 1.3322533, z: -1.7390518}
+    transformRot: {x: -0.1609175, y: -0, z: 0.49707484, w: 0.852656}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest5454
+    transformPos: {x: 1.5016791, y: 1.239528, z: -1.7261883}
+    transformRot: {x: -0.13771999, y: -0, z: 0.88571286, w: 0.44333535}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest5555
+    transformPos: {x: 1.580793, y: 1.3762287, z: -1.6984205}
+    transformRot: {x: 0.10948457, y: -0, z: -0.03468551, w: 0.9933832}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest5656
+    transformPos: {x: 1.5803796, y: 1.2791823, z: -1.6395675}
+    transformRot: {x: 0.71454537, y: -0, z: -0.07350582, w: 0.6957169}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest5757
+    transformPos: {x: 1.5893762, y: 1.3606833, z: -1.7644789}
+    transformRot: {x: -0.33053762, y: -0, z: -0.0771126, w: 0.94063747}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest5858
+    transformPos: {x: 1.6236427, y: 1.3332256, z: -1.7732025}
+    transformRot: {x: -0.4778754, y: -0, z: -0.26862144, w: 0.83634794}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest5959
+    transformPos: {x: 1.5879443, y: 1.283722, z: -1.7938437}
+    transformRot: {x: -0.7043401, y: -0, z: -0.083618104, w: 0.70492065}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest6060
+    transformPos: {x: 1.6137549, y: 1.2978851, z: -1.7880689}
+    transformRot: {x: -0.6354228, y: -0, z: -0.18079779, w: 0.7506998}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest6161
+    transformPos: {x: 1.6450561, y: 1.327218, z: -1.7594142}
+    transformRot: {x: -0.37418815, y: -0, z: -0.4069219, w: 0.8333055}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest6262
+    transformPos: {x: 1.5123502, y: 1.2870165, z: -1.6559997}
+    transformRot: {x: 0.60023236, y: -0, z: 0.43737856, w: 0.6696426}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest6363
+    transformPos: {x: 1.538036, y: 1.3167986, z: -1.6460364}
+    transformRot: {x: 0.6116977, y: -0, z: 0.16883183, w: 0.77286613}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest6464
+    transformPos: {x: 1.4913452, y: 1.2949177, z: -1.7541866}
+    transformRot: {x: -0.35230544, y: -0, z: 0.613691, w: 0.7065865}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest6565
+    transformPos: {x: 1.6531036, y: 1.3427578, z: -1.7186272}
+    transformRot: {x: -0.016730487, y: -0, z: -0.45055088, w: 0.8925941}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest6666
+    transformPos: {x: 1.6064888, y: 1.3252233, z: -1.6495808}
+    transformRot: {x: 0.5633712, y: -0, z: -0.18506303, w: 0.80521107}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest6767
+    transformPos: {x: 1.5125039, y: 1.2333877, z: -1.7435817}
+    transformRot: {x: -0.43963808, y: -0, z: 0.7813986, w: 0.4428709}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest6868
+    transformPos: {x: 1.5948943, y: 1.2688552, z: -1.7922132}
+    transformRot: {x: -0.7314895, y: -0, z: -0.09092289, w: 0.6757635}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest6969
+    transformPos: {x: 1.537618, y: 1.2796184, z: -1.6445246}
+    transformRot: {x: 0.7059755, y: -0, z: 0.24006462, w: 0.666309}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest7070
+    transformPos: {x: 1.5200307, y: 1.2211016, z: -1.6963006}
+    transformRot: {x: 0.33989105, y: -0, z: 0.84158325, w: 0.41977593}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest7171
+    transformPos: {x: 1.5902052, y: 1.3363045, z: -1.7838107}
+    transformRot: {x: -0.52952325, y: -0, z: -0.10083915, w: 0.8422806}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest7272
+    transformPos: {x: 1.5591401, y: 1.2819185, z: -1.7945677}
+    transformRot: {x: -0.695908, y: -0, z: 0.09257442, w: 0.71213907}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest7373
+    transformPos: {x: 1.5843147, y: 1.3628362, z: -1.669998}
+    transformRot: {x: 0.31794477, y: -0, z: -0.052190572, w: 0.9466718}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest7474
+    transformPos: {x: 1.5129877, y: 1.2538553, z: -1.6685885}
+    transformRot: {x: 0.6211722, y: -0, z: 0.58269155, w: 0.52403796}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest7575
+    transformPos: {x: 1.5316689, y: 1.2885444, z: -1.7873034}
+    transformRot: {x: -0.67384994, y: -0, z: 0.25944966, w: 0.691818}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest7676
+    transformPos: {x: 1.525508, y: 1.3384957, z: -1.6592091}
+    transformRot: {x: 0.4288042, y: -0, z: 0.24723706, w: 0.868908}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest7777
+    transformPos: {x: 1.5334641, y: 1.3590583, z: -1.6753163}
+    transformRot: {x: 0.27823317, y: -0, z: 0.1890368, w: 0.9417279}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest7878
+    transformPos: {x: 1.564483, y: 1.377683, z: -1.7072313}
+    transformRot: {x: 0.057007104, y: -0, z: 0.04078486, w: 0.9975404}
+    slength: 0.23333335
+    segments: 7
+  - sName: HairStrandJobTest7979
+    transformPos: {x: 1.488465, y: 1.3100985, z: -1.7452611}
+    transformRot: {x: -0.23673484, y: -0, z: 0.5906379, w: 0.77142966}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest8080
+    transformPos: {x: 1.5796866, y: 1.3510917, z: -1.7756971}
+    transformRot: {x: -0.42142677, y: -0, z: -0.031153634, w: 0.9063273}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest8181
+    transformPos: {x: 1.5097988, y: 1.3550922, z: -1.7323785}
+    transformRot: {x: -0.10307526, y: -0, z: 0.35179627, w: 0.9303844}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest8282
+    transformPos: {x: 1.603839, y: 1.3206371, z: -1.7861485}
+    transformRot: {x: -0.57485425, y: -0, z: -0.16591075, w: 0.8012593}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest8383
+    transformPos: {x: 1.4968803, y: 1.2468448, z: -1.7047853}
+    transformRot: {x: 0.16408712, y: -0, z: 0.86374956, w: 0.4764581}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest8484
+    transformPos: {x: 1.5963082, y: 1.3487865, z: -1.7745857}
+    transformRot: {x: -0.42119145, y: -0, z: -0.113362655, w: 0.89985937}
+    slength: 0.20000002
+    segments: 6
+  - sName: HairStrandJobTest8585
+    transformPos: {x: 1.486238, y: 1.269014, z: -1.703714}
+    transformRot: {x: 0.15036714, y: -0, z: 0.79203063, w: 0.59167343}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest8686
+    transformPos: {x: 1.5020863, y: 1.3327769, z: -1.6780522}
+    transformRot: {x: 0.28324723, y: -0, z: 0.44053835, w: 0.8518786}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest8787
+    transformPos: {x: 1.6275076, y: 1.3335984, z: -1.6624424}
+    transformRot: {x: 0.46119598, y: -0, z: -0.29070118, w: 0.8383265}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest8888
+    transformPos: {x: 1.6535438, y: 1.3368157, z: -1.7373376}
+    transformRot: {x: -0.17370266, y: -0, z: -0.46997845, w: 0.86541766}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest8989
+    transformPos: {x: 1.5179121, y: 1.2207794, z: -1.7262373}
+    transformRot: {x: -0.14593196, y: -0, z: 0.9028002, w: 0.40454403}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest9090
+    transformPos: {x: 1.6386226, y: 1.3576484, z: -1.7173493}
+    transformRot: {x: -0.005428374, y: -0, z: -0.30894792, w: 0.9510636}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest9191
+    transformPos: {x: 1.5419194, y: 1.3067502, z: -1.7896203}
+    transformRot: {x: -0.6442456, y: -0, z: 0.1635032, w: 0.7471375}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest9292
+    transformPos: {x: 1.5594139, y: 1.3328722, z: -1.7865177}
+    transformRot: {x: -0.54578626, y: -0, z: 0.06407426, w: 0.8354712}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest9393
+    transformPos: {x: 1.5462482, y: 1.3749819, z: -1.724766}
+    transformRot: {x: -0.05273018, y: -0, z: 0.122819565, w: 0.9910273}
+    slength: 0.23333335
+    segments: 7
+  - sName: HairStrandJobTest9494
+    transformPos: {x: 1.5108074, y: 1.274413, z: -1.773093}
+    transformRot: {x: -0.6041632, y: -0, z: 0.50341386, w: 0.6177067}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest9595
+    transformPos: {x: 1.5430496, y: 1.2951298, z: -1.642334}
+    transformRot: {x: 0.675374, y: -0, z: 0.17019522, w: 0.71756804}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest9696
+    transformPos: {x: 1.60509, y: 1.3646218, z: -1.7526281}
+    transformRot: {x: -0.24551742, y: -0, z: -0.1466289, w: 0.95823866}
+    slength: 0.13333336
+    segments: 4
+  - sName: HairStrandJobTest9797
+    transformPos: {x: 1.5326797, y: 1.2474176, z: -1.6587092}
+    transformRot: {x: 0.7481725, y: -0, z: 0.43843246, w: 0.4980111}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest9898
+    transformPos: {x: 1.6433691, y: 1.3436645, z: -1.6851416}
+    transformRot: {x: 0.25110582, y: -0, z: -0.37949148, w: 0.89046746}
+    slength: 0.100000024
+    segments: 3
+  - sName: HairStrandJobTest9999
+    transformPos: {x: 1.5219638, y: 1.2395382, z: -1.7609447}
+    transformRot: {x: -0.68004346, y: -0, z: 0.5582583, w: 0.4752777}
+    slength: 0.06666669
+    segments: 2
+  - sName: HairStrandJobTest(Clone)100100
+    transformPos: {x: 1.5619771, y: 1.3811358, z: -1.7205849}
+    transformRot: {x: -0, y: -0, z: -0, w: 1.0000001}
+    slength: 0.23333335
+    segments: 7
+  - sName: HairStrandJobTest(Clone)101101
+    transformPos: {x: 1.5979047, y: 1.3762152, z: -1.6909888}
+    transformRot: {x: -0, y: -0, z: -0, w: 1.0000001}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest(Clone)102102
+    transformPos: {x: 1.5961813, y: 1.3784392, z: -1.7350485}
+    transformRot: {x: -0, y: -0, z: -0, w: 1.0000001}
+    slength: 0.16666669
+    segments: 5
+  - sName: HairStrandJobTest(Clone)103103
+    transformPos: {x: 1.5826571, y: 1.381789, z: -1.7068735}
+    transformRot: {x: -0, y: -0, z: -0, w: 1.0000001}
+    slength: 0.26666668
+    segments: 8
+  - sName: HairStrandJobTest(Clone)104104
+    transformPos: {x: 1.5972434, y: 1.3797929, z: -1.7247008}
+    transformRot: {x: -0, y: -0, z: -0, w: 1.0000001}
+    slength: 0.16666669
+    segments: 5

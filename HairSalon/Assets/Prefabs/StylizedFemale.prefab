@@ -1760,15 +1760,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3577520945074442188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612b8893c2e1ac24d946bd00ba287a09, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d3b5e217f38a0041afce03c90c6960b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeshPrefabDistributor
-  prefab: {fileID: 1092909662484426529, guid: 266b46802cd68ce45ac1eebf2b7e1f69, type: 3}
-  targetPrefabCount: 30
-  minDistance: 0.02
+  prefab: {fileID: 0}
+  targetPrefabCount: 100
+  minDistance: 0.016
   maxAttemptsPerPrefab: 30
-  targetContainer: {fileID: 11400000, guid: 4a44327920b4d924b902d0128d020a4a, type: 2}
-  distributeOnStart: 1
+  targetContainer: {fileID: 0}
+  distributeOnStart: 0
+  distributeFromTargetContainer: 0
 --- !u!4 &3583652988071266392 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2249249984750600328, guid: cb52da87455bdbe458bd8fb47914ffcb, type: 3}

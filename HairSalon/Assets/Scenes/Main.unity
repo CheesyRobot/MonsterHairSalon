@@ -2404,14 +2404,14 @@ MonoBehaviour:
   - Hair braiding
   - Hair trim
   maxWants: 3
-  hairDistributor: {fileID: 1280451127}
+  hairDistributor: {fileID: 1280451133}
   hairProfiles:
   - type: Zombie
     hairStyle: {fileID: 11400000, guid: 4a44327920b4d924b902d0128d020a4a, type: 2}
   - type: Vampire
     hairStyle: {fileID: 11400000, guid: d34de8248daa0e345bbf3561940ac90a, type: 2}
   - type: Werewolf
-    hairStyle: {fileID: 11400000, guid: 4a44327920b4d924b902d0128d020a4a, type: 2}
+    hairStyle: {fileID: 11400000, guid: d818d511134a72848bb461b2b463206b, type: 2}
   skinTargets:
   - renderer: {fileID: 1813249626}
     materialIndex: 0
@@ -2449,7 +2449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0631118d7d811a4b9a6b2c3ffdf402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HairReviewSystem
-  hairDistributor: {fileID: 1280451129}
+  hairDistributor: {fileID: 1280451133}
   lengthText: {fileID: 1935911727}
   colorText: {fileID: 129912982}
   speedText: {fileID: 152506117}
@@ -2610,7 +2610,7 @@ PrefabInstance:
     - target: {fileID: 9046697503397677420, guid: b3a834ea99b55de469c8425f5910aaea, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1280451127}
+      objectReference: {fileID: 1280451133}
     - target: {fileID: 9046697503397677420, guid: b3a834ea99b55de469c8425f5910aaea, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -2621,7 +2621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9046697503397677420, guid: b3a834ea99b55de469c8425f5910aaea, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MeshPrefabDistributor, Assembly-CSharp
+      value: MeshPrefabDistributorJob, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9046697503397677420, guid: b3a834ea99b55de469c8425f5910aaea, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5188,44 +5188,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5441361209521627566, guid: a922f6e4a2041e441bb1acf7805fa3c4, type: 3}
   m_PrefabInstance: {fileID: 1275866784}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1280451114 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3577520945074442188, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
-  m_PrefabInstance: {fileID: 3645697083211395572}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1280451127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280451114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612b8893c2e1ac24d946bd00ba287a09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MeshPrefabDistributor
-  prefab: {fileID: 1092909662484426529, guid: 4164c5a120b161146bbdd3e583344bd8, type: 3}
-  targetPrefabCount: 300
-  minDistance: 0.016
-  maxAttemptsPerPrefab: 100
-  targetContainer: {fileID: 0}
-  distributeOnStart: 0
-  distributeFromTargetContainer: 0
 --- !u!137 &1280451128 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3375520201293236051, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
   m_PrefabInstance: {fileID: 3645697083211395572}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1280451129 stripped
+--- !u!114 &1280451133 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
   m_PrefabInstance: {fileID: 3645697083211395572}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280451114}
-  m_Enabled: 0
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612b8893c2e1ac24d946bd00ba287a09, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d3b5e217f38a0041afce03c90c6960b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeshPrefabDistributor
 --- !u!1001 &1287061428
@@ -8641,15 +8617,7 @@ PrefabInstance:
     - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
       propertyPath: prefab
       value: 
-      objectReference: {fileID: 1092909662484426529, guid: 266b46802cd68ce45ac1eebf2b7e1f69, type: 3}
-    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
-      propertyPath: minDistance
-      value: 0.016
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1092909662484426529, guid: 24f41e1f428b6434fa3b68db9e0b40d4, type: 3}
     - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
       propertyPath: targetContainer
       value: 
@@ -8659,24 +8627,13 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
-      propertyPath: targetPrefabCount
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
-      propertyPath: maxAttemptsPerPrefab
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
       propertyPath: distributeFromTargetContainer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3577520945074442188, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1280451127}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
 --- !u!1 &3645697083211395573 stripped
 GameObject:
