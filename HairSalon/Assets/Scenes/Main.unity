@@ -8624,7 +8624,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: d34de8248daa0e345bbf3561940ac90a, type: 2}
     - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
       propertyPath: distributeOnStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8395088075570342187, guid: 38e744787337ffa4a83a952dbfb58f4c, type: 3}
       propertyPath: distributeFromTargetContainer
