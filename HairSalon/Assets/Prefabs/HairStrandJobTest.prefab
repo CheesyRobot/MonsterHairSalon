@@ -268,9 +268,10 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 1
-  factor1: 0.5
-  factor2: 0.5
+  damping: 0.98
+  friction: 0.98
   segmentLength: 0
+  initializeOnStartup: 0
 --- !u!1 &5045554762995988590
 GameObject:
   m_ObjectHideFlags: 0

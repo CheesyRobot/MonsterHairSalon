@@ -238,8 +238,8 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 3
-    textureScale: {x: 1, y: 1}
+    textureMode: 1
+    textureScale: {x: 10, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
@@ -254,20 +254,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1092909662484426529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f11ec7c5213483a40924530cb1b585b4, type: 3}
+  m_Script: {fileID: 11500000, guid: d83568c82367bf2448e3a286c889937a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HairStrand
-  segmentCount: 30
-  totalLength: 0.3
+  segmentCount: 10
+  totalLength: 0.4
   hairThickness: 0.02
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  gravity: {x: 0, y: -9.81, z: 0}
+  gravity:
+    x: 0
+    y: -9.81
+    z: 0
   physicsIterations: 5
   collisionMask:
     serializedVersion: 2
     m_Bits: 1
-  factor1: 0.5
-  factor2: 0.5
+  damping: 0.98
+  friction: 0.5
   segmentLength: 0
 --- !u!1 &5045554762995988590
 GameObject:

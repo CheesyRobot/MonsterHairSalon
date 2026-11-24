@@ -5,7 +5,7 @@ using TMPro;
 public class HairReviewSystem : MonoBehaviour
 {
     [Header("References")]
-    public MeshPrefabDistributor hairDistributor;
+    public MeshPrefabDistributorJob hairDistributor;
 
     [Header("Review board texts")]
     public TMP_Text lengthText;
@@ -90,7 +90,7 @@ public class HairReviewSystem : MonoBehaviour
 
         float errorSum = 0f;
         int counted = 0;
-        foreach (HairStrand strand in strands)
+        foreach (HairStrandJob strand in strands)
         {
             if (strand == null || strand.StartLength <= 0f) continue;
             float ratio = strand.GetTotalLength() / strand.StartLength;
@@ -110,7 +110,7 @@ public class HairReviewSystem : MonoBehaviour
 
         float errorSum = 0f;
         int counted = 0;
-        foreach (HairStrand strand in strands)
+        foreach (HairStrandJob strand in strands)
         {
             if (strand == null) continue;
             errorSum += ColorDistance(strand.GetAverageColor(), targetColor);

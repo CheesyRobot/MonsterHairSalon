@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Burst;
@@ -25,6 +26,7 @@ public class HairStrandJob : MonoBehaviour
             color = col;
         }*/
     }
+    private bool initialized = false;
 
     [Header("Hair Generation")]
     [SerializeField] private int segmentCount = 20;
@@ -38,24 +40,33 @@ public class HairStrandJob : MonoBehaviour
     [SerializeField] private float3 gravity = new float3(0, -9.81f, 0);
     [SerializeField] private int physicsIterations = 5;
     [SerializeField] private LayerMask collisionMask;
-    private int rootFloat = 3;
-    [SerializeField] private float factor1 = 0.5f;
-    [SerializeField] private float factor2 = 0.5f;
+    private float antiGravFloat = 3.5f;
+    private int rootFloat = 5;
+    [SerializeField] private float damping = 0.98f;
+    private float factor1 = 0.5f;
+    private float factor2 = 0.5f;
+    [SerializeField] private float friction = 0.5f;
 
     private List<HairSegment> segments = new List<HairSegment>();
     private NativeArray<HairSegment> nativeSegments;
     private List<GameObject> colliderObjs = new List<GameObject>();
+
     private LineRenderer lineRenderer;
     public float segmentLength;
+
+    private float startLength;
+    public float StartLength => startLength;
 
     public Color BaseColor => baseColor; // the ClientGenerator reads this for the hair on the TV picture
 
     private bool colorsDirty;
     private const int MaxGradientKeys = 8;
 
+    public bool initializeOnStartup = false;
     void Start()
     {
-        InitializeHairStrand();
+        if(initializeOnStartup)
+            InitializeHairStrand();
     }
 
     void LateUpdate()
@@ -66,13 +77,14 @@ public class HairStrandJob : MonoBehaviour
 
     void Update()
     {
+        if(!initialized) return;
         // Line Renderer visualization
         for (int i = 0; i < segments.Count; i++)
         {
             lineRenderer.SetPosition(i, segments[i].currentPos);
 
             // Sinchronizing collider positions with the hair segments
-            if (colliderObjs[i] != null)
+            if (colliderObjs != null || colliderObjs.Count > 0)
             {
                 colliderObjs[i].transform.position = segments[i].currentPos;
             }
@@ -81,18 +93,20 @@ public class HairStrandJob : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!initialized) return;
         SimulatePhysics();
         ApplyConstraints();
     }
 
     public void InitializeHairStrand()
     {
+        initialized = true;
         lineRenderer = GetComponent<LineRenderer>();
         segmentLength = totalLength / segmentCount;
-
+        startLength = totalLength;
         // Generating hair segments upwards and initializing their positions
-        //segments.Clear();
         Vector3 spawnPos = transform.position;
+        segments.Clear();
         colliderObjs.Clear();
         for (int i = 0; i < segmentCount; i++)
         {
@@ -108,10 +122,11 @@ public class HairStrandJob : MonoBehaviour
             CreateSegmentCollider(segment, i);
 
             segments.Add(segment);
-            spawnPos += Vector3.up * segmentLength;
+            spawnPos += Vector3.up * hairThickness/2;
         }
         lineRenderer.positionCount = segments.Count;
-
+        if (nativeSegments.IsCreated)
+            nativeSegments.Dispose();
         nativeSegments = new NativeArray<HairSegment>(segments.Count, Allocator.Persistent);
         
         ApplyColors();
@@ -121,45 +136,24 @@ public class HairStrandJob : MonoBehaviour
     {
         Profiler.BeginSample("SimulateHairPhysics");
         // Verlet integration
-        float3 upVector = 8*transform.up.normalized*-math.dot(transform.up,gravity);
-        for(int i = 1; i < rootFloat; i++)
+        int segmentsCount = segments.Count;
+        float floatingAmnt = antiGravFloat;
+        if (segmentsCount < 10)
         {
-            float gravityImpact = (1-(float)(i+1)/rootFloat);
-            HairSegment s = segments[i];
-            float3 velocity = s.currentPos - s.oldPos;
-            s.oldPos = s.currentPos;
-            s.currentPos += velocity + Time.fixedDeltaTime * Time.fixedDeltaTime * (upVector+gravityImpact*gravity);
-            segments[i] = s;
+            floatingAmnt = math.clamp(antiGravFloat - antiGravFloat * (segmentsCount / segmentCount), 0, antiGravFloat);
         }
-        for (int i = rootFloat; i < segments.Count; i++)
+        float3 upVector = floatingAmnt * transform.up.normalized*-math.dot(transform.up,gravity);
+        for (int i = 1; i < segmentsCount; i++)
         {
             HairSegment s = segments[i];
-            float3 velocity = s.currentPos - s.oldPos;
+            float gravityImpact = 1-math.clamp((float)i * i / (rootFloat*rootFloat), 0, 1);
+            float3 velocity = damping*(s.currentPos - s.oldPos);
             s.oldPos = s.currentPos;
-            s.currentPos += velocity + Time.fixedDeltaTime * Time.fixedDeltaTime*gravity;
+            s.currentPos += Time.fixedDeltaTime * Time.fixedDeltaTime*(upVector*gravityImpact + gravity) + velocity;
             segments[i] = s;
         }
 
         Profiler.EndSample();
-    }
-
-    [BurstCompile]
-    public struct SimulatePhysicsJob : IJobParallelFor
-    {
-        public NativeArray<HairSegment> segments;
-        [ReadOnly] public float3 gravity;
-        [ReadOnly] public float deltaTime;
-        public void Execute(int index)
-        {
-            if (index != 0)
-            {  // Skip the root segment
-                HairSegment s = segments[index];
-                float3 velocity = s.currentPos - s.oldPos;
-                s.oldPos = s.currentPos;
-                s.currentPos += velocity + gravity * deltaTime * deltaTime;
-                segments[index] = s;
-            }
-        }
     }
 
         private void ApplyConstraints()
@@ -235,6 +229,7 @@ public class HairStrandJob : MonoBehaviour
             {
                 // Ignore colliders that are part of the hair strand itself
                 if (col.transform.IsChildOf(transform)) continue;
+                //if (math.length(s.oldPos - s.currentPos) < minVelColCheck) break;
 
                 if (Physics.ComputePenetration(
                     colliderObjs[i].GetComponent<SphereCollider>(), s.currentPos, Quaternion.identity,
@@ -242,10 +237,16 @@ public class HairStrandJob : MonoBehaviour
                     out Vector3 direction, out float distance))
                 {
                     s.currentPos += (float3)(direction * distance);
+                    float3 velocity = (s.currentPos - s.oldPos);
+                    velocity *= (1f - friction);
+                    s.oldPos = s.currentPos - velocity;
+
                     segments[i] = s;
                 }
             }
         }
+
+        
         Profiler.EndSample();
     }
 
@@ -260,7 +261,7 @@ public class HairStrandJob : MonoBehaviour
         sc.radius = segment.radius;
         sc.isTrigger = true;
 
-        // Pridedame pagalbinį komponentą susidūrimų sekimui
+        // Component for collision detection
         HairKnotConnector connector = colObj.AddComponent<HairKnotConnector>();
         connector.Setup(this, index);
 
@@ -268,10 +269,10 @@ public class HairStrandJob : MonoBehaviour
     }
 
 
-    public void CutHairAt(int cutIndex)
+    public void CutHairAt(int cutIndex, CuttingTool tool)
     {
-        if (cutIndex <= 0 || cutIndex >= segments.Count) return;
-
+        if (cutIndex < 0 || cutIndex >= segments.Count) return;
+        if (tool is not Shaver) cutIndex++;
         // Destroying colliders and removing segments from the list
         for (int i = segments.Count - 1; i > cutIndex; i--)
         {
@@ -283,9 +284,9 @@ public class HairStrandJob : MonoBehaviour
             totalLength -= segmentLength;
             segments.RemoveAt(i);
         }
-        //if (nativeSegments.IsCreated)
-        //    nativeSegments.Dispose();
-        //nativeSegments = new NativeArray<HairSegment>(segments.ToArray(), Allocator.Persistent);
+        if (nativeSegments.IsCreated)
+            nativeSegments.Dispose();
+        nativeSegments = new NativeArray<HairSegment>(segments.ToArray(), Allocator.Persistent);
         // Updating Line Renderer segments count
         lineRenderer.positionCount = segments.Count;
         segmentCount = segments.Count;
@@ -374,6 +375,14 @@ public class HairStrandJob : MonoBehaviour
         segmentCount = value;
     }
 
+    public Color GetAverageColor()
+    {
+        if (segments.Count == 0) return baseColor;
+        Color sum = Color.black;
+        for (int i = 0; i < segments.Count; i++) sum += segments[i].color;
+        return sum / segments.Count;
+    }
+
     public void OnDestroy()
     {
         if (nativeSegments.IsCreated)
@@ -398,33 +407,68 @@ public class HairStrandJob : MonoBehaviour
 
             for (int iter = 0; iter < physicsIterations; iter++)
             {
-                for (int i = 0; i < segments.Length - 1; i++)
+                // Alternating constraint checks from top and bottom
+                if (iter % 2 == 0)
                 {
-                    HairSegment first = segments[i];
-                    HairSegment second = segments[i + 1];
-
-                    float dist = math.distance(first.currentPos, second.currentPos);
-                    float error = math.abs(dist - segmentLength);
-                    float3 changeDir = float3.zero;
-
-                    changeDir = math.normalize(first.currentPos - second.currentPos);
-
-                    float3 changeAmount = changeDir * error;
-                    if (i != 0)
+                    for (int i = 0; i < segments.Length - 1; i++)
                     {
-                        first.currentPos -= changeAmount * factor1;
-                        second.currentPos += changeAmount * factor2;
+                        HairSegment first = segments[i];
+                        HairSegment second = segments[i + 1];
+
+                        float3 changeDir = second.currentPos - first.currentPos;
+                        float dist = math.distance(first.currentPos, second.currentPos);
+                        if (dist == 0) return;
+
+                        float3 n = changeDir / dist;
+                        //float error = math.abs(dist - segmentLength);
+
+                        float changeAmount = dist - segmentLength;
+                        float3 off = changeAmount * n;
+                        if (i != 0)
+                        {
+                            first.currentPos += off * factor1;
+                            second.currentPos -= off * factor1;
+                        }
+                        else
+                        {
+                            // If its the first segment, only move the second one
+                            second.currentPos -= off;
+                        }
+                        segments[i] = first;
+                        segments[i + 1] = second;
                     }
-                    else
+                }
+                else
+                {
+                    for (int i = segments.Length - 1; i > 0; i--)
                     {
-                        // If its the first segment, only move the second one
-                        second.currentPos += changeAmount;
+                        HairSegment first = segments[i - 1];
+                        HairSegment second = segments[i];
+
+                        float3 changeDir = second.currentPos - first.currentPos;
+                        float dist = math.distance(first.currentPos, second.currentPos);
+                        if (dist == 0) return;
+
+                        float3 n = changeDir / dist;
+                        //float error = math.abs(dist - segmentLength);
+
+                        float changeAmount = dist - segmentLength;
+                        float3 off = changeAmount * n;
+                        if (i != 0)
+                        {
+                            first.currentPos += off * factor1;
+                            second.currentPos -= off * factor1;
+                        }
+                        else
+                        {
+                            // If its the first segment, only move the second one
+                            second.currentPos -= off;
+                        }
+                        segments[i-1] = first;
+                        segments[i] = second;
                     }
-                    segments[i] = first;
-                    segments[i + 1] = second;
                 }
             }
-
         }
     }
 }

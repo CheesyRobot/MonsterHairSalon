@@ -29,7 +29,7 @@ public class ClientGenerator : MonoBehaviour
     }
 
     [Header("Hair")]
-    public MeshPrefabDistributor hairDistributor;
+    public MeshPrefabDistributorJob hairDistributor;
     public HairProfile[] hairProfiles;
 
     //The skin tint a client type gets, the type has to be written exactly like in the types list
@@ -178,7 +178,7 @@ public class ClientGenerator : MonoBehaviour
     private void SetHairPicture(HairStyleSO style)
     {
         if (hairImage == null || style == null || style.hairPrefab == null) return;
-        if (style.hairPrefab.TryGetComponent(out HairStrand strand)) hairImage.color = strand.BaseColor;
+        if (style.hairPrefab.TryGetComponent(out HairStrandJob strand)) hairImage.color = strand.BaseColor;
     }
 
     //Finds the skin profile of the current type and tints the skin with it
@@ -237,7 +237,7 @@ public class ClientGenerator : MonoBehaviour
     {
         foreach (var profile in hairProfiles)
             if (profile.type == currentType && profile.hairStyle != null && profile.hairStyle.hairPrefab != null
-                && profile.hairStyle.hairPrefab.TryGetComponent(out HairStrand strand))
+                && profile.hairStyle.hairPrefab.TryGetComponent(out HairStrandJob strand))
                 return strand.BaseColor;
         return Color.white;
     }
