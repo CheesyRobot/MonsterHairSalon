@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Burst;
@@ -266,10 +267,10 @@ public class HairStrandJob : MonoBehaviour
     }
 
 
-    public void CutHairAt(int cutIndex)
+    public void CutHairAt(int cutIndex, CuttingTool tool)
     {
         if (cutIndex < 0 || cutIndex >= segments.Count) return;
-
+        if (tool is not Shaver) cutIndex++;
         // Destroying colliders and removing segments from the list
         for (int i = segments.Count - 1; i > cutIndex; i--)
         {

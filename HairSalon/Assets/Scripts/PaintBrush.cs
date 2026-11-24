@@ -37,9 +37,11 @@ public class PaintBrush : MonoBehaviour
     private readonly Collider[] hits = new Collider[32]; // reused every frame to avoid garbage
     private MaterialPropertyBlock block;
     private int colorId;
+    private AudioSource audioSource;
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         grab = GetComponent<XRGrabInteractable>();
         colorId = Shader.PropertyToID(colorProperty);
         block = new MaterialPropertyBlock();
@@ -117,7 +119,6 @@ public class PaintBrush : MonoBehaviour
         {
             var knot = hits[i].GetComponent<HairKnotConnector>();
             if (knot == null || knot.Strand == null) continue;
-
             knot.Strand.PaintAtKnot(knot.KnotIndex, brushColor,
                                     knotRadius, paintSpeed * Time.deltaTime);
         }
@@ -134,6 +135,11 @@ public class PaintBrush : MonoBehaviour
             bristleRenderer.GetPropertyBlock(block);
             block.SetColor(colorId, color);
             bristleRenderer.SetPropertyBlock(block);
+        }
+        if (audioSource != null)
+        {
+            audioSource.pitch = Random.Range(0.85f, 1.15f);
+            audioSource.Play();
         }
     }
 

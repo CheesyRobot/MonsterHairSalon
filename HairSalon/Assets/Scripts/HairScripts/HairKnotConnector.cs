@@ -18,15 +18,15 @@ public class HairKnotConnector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Checking if the colliding object is the scissors or paintbrush
-        if (other.gameObject.name == "Scissors")// || other.CompareTag("Scissors"))
+        if (other.CompareTag("CuttingTool"))// || other.CompareTag("Scissors"))
         {
-            Debug.Log($"Hair cut at segment: {knotIndex}");
+            //Debug.Log($"Hair cut at segment: {knotIndex}");
             if (mainHairScriptJob != null)
-            { mainHairScriptJob.CutHairAt(knotIndex); }
+            { mainHairScriptJob.CutHairAt(knotIndex, other.GetComponent<CuttingTool>()); }
         }
-        else if (other.gameObject.name == "PaintBrush")
+        else if (other.CompareTag("PaintTool"))
         {
-            Debug.Log("Hair touched with paintbrush!");
+            //Debug.Log("Hair touched with paintbrush!");
         }
     }
 }

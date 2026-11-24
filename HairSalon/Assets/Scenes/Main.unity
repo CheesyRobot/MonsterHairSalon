@@ -1779,7 +1779,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7016056211590806357, guid: af21c0cc641eb014f9f839089a03d1db, type: 3}
       propertyPath: m_Name
-      value: Scissors
+      value: ElectricShaver
       objectReference: {fileID: 0}
     - target: {fileID: 7101507453724298854, guid: af21c0cc641eb014f9f839089a03d1db, type: 3}
       propertyPath: m_LocalPosition.x
