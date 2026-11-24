@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables; // XRI 3.x, remove this line if you are on XRI 2.x
@@ -37,9 +38,12 @@ public class PaintBrush : MonoBehaviour
     private readonly Collider[] hits = new Collider[32]; // reused every frame to avoid garbage
     private MaterialPropertyBlock block;
     private int colorId;
+    private AudioSource audioSource;
+    public List<AudioClip> clipList = new List<AudioClip>();
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         grab = GetComponent<XRGrabInteractable>();
         colorId = Shader.PropertyToID(colorProperty);
         block = new MaterialPropertyBlock();
@@ -96,6 +100,10 @@ public class PaintBrush : MonoBehaviour
             if (!hits[i].TryGetComponent<Renderer>(out var swatchRenderer)) continue;
             Color swatchColor = swatchRenderer.sharedMaterial.color;
 
+            if (audioSource != null && clipList.Count != 0 && !audioSource.isPlaying){
+                audioSource.pitch = Random.Range(0.85f, 1.15f);
+                audioSource.PlayOneShot(clipList[0]);
+            }
             if (pickupBlendSpeed <= 0f)
             {
                 if (swatchColor != brushColor) SetColor(swatchColor);
@@ -117,7 +125,6 @@ public class PaintBrush : MonoBehaviour
         {
             var knot = hits[i].GetComponent<HairKnotConnector>();
             if (knot == null || knot.Strand == null) continue;
-
             knot.Strand.PaintAtKnot(knot.KnotIndex, brushColor,
                                     knotRadius, paintSpeed * Time.deltaTime);
         }
@@ -139,6 +146,24 @@ public class PaintBrush : MonoBehaviour
 
     // Handy for UI buttons / XR events
     public void SetPainting(bool painting) { IsPainting = painting; }
+
+    public void PlayContinuousAudio(bool playContinuousAudio)
+    {
+        if (audioSource != null && clipList.Count != 0)
+        {
+            if (playContinuousAudio)
+            {
+                audioSource.pitch = Random.Range(0.85f, 1.15f);
+                audioSource.generator = clipList[1];
+                audioSource.loop = true;
+                audioSource.Play();
+            }
+            else { 
+                audioSource.loop = false;
+                audioSource.Stop();
+            }
+        }
+    }
 
     // Shows the tip radius in the scene view
     void OnDrawGizmosSelected()

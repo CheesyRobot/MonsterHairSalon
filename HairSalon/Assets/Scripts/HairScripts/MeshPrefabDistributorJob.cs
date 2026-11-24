@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeshPrefabDistributor : MonoBehaviour
+public class MeshPrefabDistributorJob : MonoBehaviour
 {
     [Header("Settings")]
     [Tooltip("The prefab you want to distribute across the mesh.")]
@@ -16,7 +16,8 @@ public class MeshPrefabDistributor : MonoBehaviour
     [Tooltip("How many times the script will try to find a valid spot for a single prefab before skipping it to prevent freezing.")]
     [SerializeField] private int maxAttemptsPerPrefab = 30;
 
-    private List<HairStrand> instantiatedPrefabsList = new List<HairStrand>();
+    [SerializeField]
+    private List<HairStrandJob> instantiatedPrefabsList = new List<HairStrandJob>();
 
     [Header("Data Saving")]
     [Tooltip("The ScriptableObject asset where references will be saved.")]
@@ -27,12 +28,12 @@ public class MeshPrefabDistributor : MonoBehaviour
     [SerializeField] private bool distributeOnStart = false;
     [SerializeField] private bool distributeFromTargetContainer = true;
 
-    public IReadOnlyList<HairStrand> Strands => instantiatedPrefabsList;
+    public IReadOnlyList<HairStrandJob> Strands => instantiatedPrefabsList;
 
     private void Start()
     {
         if (!distributeOnStart) return;
-        if(targetContainer != null && distributeFromTargetContainer)
+        if (targetContainer != null && distributeFromTargetContainer)
             GenerateHairstyle(targetContainer);
         else
             DistributePrefabs();
@@ -45,7 +46,7 @@ public class MeshPrefabDistributor : MonoBehaviour
         prefab = newPrefab;
         targetPrefabCount = count;
         minDistance = distance;
-       
+
         ClearHair();
         DistributePrefabs();
     }
@@ -70,10 +71,10 @@ public class MeshPrefabDistributor : MonoBehaviour
     // Removes all the hair strands that were spawned before
     public void ClearHair()
     {
-        foreach (HairStrand strand in instantiatedPrefabsList)
+        foreach (HairStrandJob strand in instantiatedPrefabsList)
         {
             if (strand != null) Destroy(strand.gameObject);
-            
+
         }
         instantiatedPrefabsList.Clear();
     }
@@ -93,10 +94,10 @@ public class MeshPrefabDistributor : MonoBehaviour
         }
 
         ClearHair();
-        instantiatedPrefabsList = new List<HairStrand>();
+        instantiatedPrefabsList = new List<HairStrandJob>();
         foreach (HairStrandProperty strand in style.hairList)
         {
-            
+
 #if UNITY_EDITOR
             GameObject spawnedInstance = UnityEditor.PrefabUtility.InstantiatePrefab(style.hairPrefab, transform) as GameObject;
             if (spawnedInstance != null)
@@ -109,13 +110,13 @@ public class MeshPrefabDistributor : MonoBehaviour
                 GameObject spawnedInstance = Instantiate(style.hairPrefab, strand.transformPos, strand.transformRot, transform);
 #endif
             spawnedInstance.name = strand.sName;
-            HairStrand hair = spawnedInstance.GetComponent<HairStrand>();
+            HairStrandJob hair = spawnedInstance.GetComponent<HairStrandJob>();
             // Set HairStrand properties
             hair.SetTotalLength(strand.slength);
             hair.SetTotalSegments(strand.segments);
             // Regenerating the hairstrand anew to apply properties
             hair.InitializeHairStrand();
-            instantiatedPrefabsList.Add(spawnedInstance.GetComponent<HairStrand>());
+            instantiatedPrefabsList.Add(spawnedInstance.GetComponent<HairStrandJob>());
         }
     }
 
@@ -223,7 +224,7 @@ public class MeshPrefabDistributor : MonoBehaviour
 #else
                 GameObject spawnedInstance = Instantiate(prefab, finalWorldPos, worldRot, transform);
 #endif
-                instantiatedPrefabsList.Add(spawnedInstance.GetComponent<HairStrand>());
+                instantiatedPrefabsList.Add(spawnedInstance.GetComponent<HairStrandJob>());
             }
         }
 
@@ -290,7 +291,7 @@ public class MeshPrefabDistributor : MonoBehaviour
         }
         List<HairStrandProperty> hairStrandProperties = new List<HairStrandProperty>();
         int i = 0;
-        foreach (HairStrand prefab in instantiatedPrefabsList)
+        foreach (HairStrandJob prefab in instantiatedPrefabsList)
         {
             HairStrandProperty property = new HairStrandProperty();
             property.sName = prefab.name + i;

@@ -2,30 +2,31 @@ using UnityEngine;
 
 public class HairKnotConnector : MonoBehaviour
 {
-    private HairStrand mainHairScript;
+    private HairStrandJob mainHairScriptJob;
     private int knotIndex;
 
     // The paint brush reads these to know which strand and knot it touched
-    public HairStrand Strand => mainHairScript;
+    public HairStrandJob Strand => mainHairScriptJob;
     public int KnotIndex => knotIndex;
 
-    public void Setup(HairStrand hairScript, int index)
+    public void Setup(HairStrandJob hairScript, int index)
     {
-        mainHairScript = hairScript;
+        mainHairScriptJob = hairScript;
         knotIndex = index;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         // Checking if the colliding object is the scissors or paintbrush
-        if (other.gameObject.name == "Scissors")// || other.CompareTag("Scissors"))
+        if (other.CompareTag("CuttingTool"))// || other.CompareTag("Scissors"))
         {
-            Debug.Log($"Hair cut at segment: {knotIndex}");
-            mainHairScript.CutHairAt(knotIndex);
+            //Debug.Log($"Hair cut at segment: {knotIndex}");
+            if (mainHairScriptJob != null)
+            { mainHairScriptJob.CutHairAt(knotIndex, other.GetComponent<CuttingTool>()); }
         }
-        else if (other.gameObject.name == "PaintBrush")
+        else if (other.CompareTag("PaintTool"))
         {
-            Debug.Log("Hair touched with paintbrush!");
+            //Debug.Log("Hair touched with paintbrush!");
         }
     }
 }

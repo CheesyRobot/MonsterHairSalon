@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1768068001729914693}
   - component: {fileID: 1547598675866358549}
   - component: {fileID: 160058051293007486}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 7216261970484656142}
   - component: {fileID: 417197274195446218}
   - component: {fileID: 3406296441110601982}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HairStrand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,8 +238,8 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 3
-    textureScale: {x: 1, y: 1}
+    textureMode: 1
+    textureScale: {x: 10, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
@@ -254,18 +254,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1092909662484426529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f11ec7c5213483a40924530cb1b585b4, type: 3}
+  m_Script: {fileID: 11500000, guid: d83568c82367bf2448e3a286c889937a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HairStrand
-  segmentCount: 30
-  totalLength: 0.3
+  segmentCount: 10
+  totalLength: 0.4
   hairThickness: 0.02
   baseColor: {r: 1, g: 1, b: 1, a: 1}
-  gravity: {x: 0, y: -9.81, z: 0}
+  gravity:
+    x: 0
+    y: -9.81
+    z: 0
   physicsIterations: 5
   collisionMask:
     serializedVersion: 2
     m_Bits: 1
+  damping: 0.98
+  friction: 0.5
   segmentLength: 0
 --- !u!1 &5045554762995988590
 GameObject:
@@ -278,7 +283,7 @@ GameObject:
   - component: {fileID: 1985199546739392163}
   - component: {fileID: 5947082422890537283}
   - component: {fileID: 2300911050886336720}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
