@@ -31,6 +31,8 @@ public class WaterStream : MonoBehaviour
     private Renderer[] renderers; 
     private bool flowing;
 
+    private AudioSource audioSource;
+
     void Awake()
     {
         if (splash == null) splash = GetComponentInChildren<ParticleSystem>();
@@ -40,7 +42,9 @@ public class WaterStream : MonoBehaviour
         meshCenterY = bounds.center.y;
         meshHalfLength = bounds.size.y * 0.5f;
 
-        
+        audioSource = GetComponent<AudioSource>();
+
+
         if (splash != null)
         {
             farSign = transform.InverseTransformPoint(splash.transform.position).y >= meshCenterY ? 1f : -1f;
@@ -60,6 +64,7 @@ public class WaterStream : MonoBehaviour
             shower.selectEntered.AddListener(OnGrabbed);
             shower.selectExited.AddListener(OnReleased);
             SetFlowing(shower.isSelected);
+            
         }
         else
         {
@@ -96,6 +101,7 @@ public class WaterStream : MonoBehaviour
             if (on) { if (!splash.isPlaying) splash.Play(); }
             else splash.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
+       
     }
 
     // LateUpdate so it runs after the shower head was moved
@@ -126,6 +132,9 @@ public class WaterStream : MonoBehaviour
             var emission = splash.emission;
             emission.enabled = hitSomething;
         }
+
+        
+        
     }
 
     // Closest hit that isn't part of the shower itself
@@ -155,5 +164,22 @@ public class WaterStream : MonoBehaviour
         Vector3 a = transform.TransformPoint(new Vector3(0f, meshCenterY - meshHalfLength, 0f));
         Vector3 b = transform.TransformPoint(new Vector3(0f, meshCenterY + meshHalfLength, 0f));
         return (a - b).magnitude / Mathf.Max(transform.localScale.y, 0.0001f);
+    }
+
+    public void EnableSound()
+    {
+        if (audioSource.generator != null)
+        {
+            audioSource.pitch = Random.Range(0.75f, 1.25f);
+            audioSource.Play();
+        }
+    }
+
+    public void DisableSound()
+    {
+        if (audioSource.generator != null)
+        {
+            audioSource.Stop();
+        }
     }
 }
