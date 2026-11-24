@@ -62,9 +62,11 @@ public class HairStrandJob : MonoBehaviour
     private bool colorsDirty;
     private const int MaxGradientKeys = 8;
 
+    public bool initializeOnStartup = false;
     void Start()
     {
-        //InitializeHairStrand();
+        if(initializeOnStartup)
+            InitializeHairStrand();
     }
 
     void LateUpdate()
